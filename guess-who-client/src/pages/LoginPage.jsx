@@ -39,16 +39,14 @@ export default function LoginPage() {
     }
   };
   return (
-    <div className="login-container flex items-center justify-center h-screen">
+    <section className="login-container flex items-center justify-center h-screen">
       <form
-        className="container mx-auto p-6 bg-white shadow-md rounded-lg"
+        className="container h-fit mx-auto p-6 bg-white shadow-md rounded-lg"
         onSubmit={handleSubmit(onSubmit)}
       >
-        <h1 className=" text-accent4-dark">
-          Welcome Back
-        </h1>
+        <h1 className=" text-accent4-dark">Welcome Back</h1>
         <div className="form-group">
-          <label htmlFor="email" className="text-lg">
+          <label htmlFor="email" className="w-1/3 text-lg">
             Email
           </label>
           <input
@@ -59,8 +57,11 @@ export default function LoginPage() {
             {...register("email", { required: true })}
           />
         </div>
+          {errors.email && (
+            <span className="text-red-600">This field is required</span>
+          )}
         <div className="form-group">
-          <label htmlFor="password" className="text-lg">
+          <label htmlFor="password" className="w-1/3 text-lg">
             Password
           </label>
           <input
@@ -71,6 +72,9 @@ export default function LoginPage() {
             {...register("password", { required: true })}
           />
         </div>
+        {errors.password && (
+            <span className="text-red-600">This field is required</span>
+          )}
         <div className="form-group">
           <Link
             to="/forgot"
@@ -88,7 +92,7 @@ export default function LoginPage() {
             Sign Up
           </Link>
         </p>
-        <div className="form-group text-center">
+        <div className=" text-center">
           <button
             className="button w-fit text-white bg-accent4-dark hover:bg-accent4-light hover:text-accent4-dark font-semibold focus:outline-none focus:ring-2 focus:ring-primary-light focus:ring-opacity-50"
             type="submit"
@@ -99,6 +103,6 @@ export default function LoginPage() {
       </form>
 
       {message && <MessageBanner type={messageType} message={message} />}
-    </div>
+    </section>
   );
 }

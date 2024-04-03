@@ -1,11 +1,10 @@
 import axios from "axios";
 
 const axiosInstance = axios.create({
-  baseURL: process.env.test,
+  // baseURL: process.env.REACT_APP_BASE_URL,
+  baseURL: "http://localhost:3000",
 });
 
-console.log(process.env.test, "base ursl" )
-console.log(process.env, 'env');
 const handleApiError = (error) => {
   if (error.response) {
     console.error("Response data:", error.response.data);

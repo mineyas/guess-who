@@ -97,7 +97,6 @@ export default function Characters() {
               <th>Avatar</th>
               <th>Name</th>
               <th>Gender</th>
-              {/* <th>Role</th> */}
               <th>Actions</th>
             </tr>
           </thead>

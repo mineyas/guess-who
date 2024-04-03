@@ -16,6 +16,7 @@ import Navbar from "./components/Navbar";
 import { logoutGet } from "./api/axios";
 import Users from "./components/Admin/Users";
 import Characters from "./components/Admin/Characters";
+import GamePage from "./pages/GamePage";
 // import './assets/global.css'
 
 function App() {
@@ -54,14 +55,18 @@ function App() {
       )}
       {/* <div> */}
       <Routes>
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/signup" element={<SignupPage />} />
+
         <Route
           exact
           path="/"
           element={isLoggedIn() ? <HomePage /> : <Navigate to="/login" />}
         />
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/signup" element={<SignupPage />} />
-
+        <Route
+          path="/game"
+          element={isLoggedIn() ? <GamePage /> : <Navigate to="/login" />}
+        />
         <Route
           path="/admin"
           element={isAdmin() ? <AdminPage /> : <Navigate to="/login" />}
@@ -74,6 +79,7 @@ function App() {
           path="/admin/characters"
           element={isAdmin() ? <Characters /> : <Navigate to="/login" />}
         />
+
         {/* <Route
           path="/admin/users"
           element={isAdmin() ? <AdminUsers /> : <Navigate to="/login" />}

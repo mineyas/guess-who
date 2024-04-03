@@ -1,5 +1,7 @@
+
 export async function apiCall(endpoint, method, data = null) {
-  const url = `${process.env.BASE_URL}${endpoint}`;
+  const url = `${process.env.REACT_APP_BASE_URL}${endpoint}`;
+  console.log(process.env.REACT_APP_BASE_URL, 'urlll')
   const options = {
     method,
     headers: {

@@ -41,16 +41,19 @@ export default function SignupPage() {
   };
 
   return (
-    <div className="flex items-center">
+    <section className="flex items-center">
       <div className="w-1/2">
         <img className="h-screen object-cover w-full" src={img} alt="pattern" />
       </div>
-      <form className="container mx-auto" onSubmit={handleSubmit(onSubmit)} >
+      <form
+        className="container h-fit mx-auto"
+        onSubmit={handleSubmit(onSubmit)}
+      >
         <h1 className="text-3xl font-bold mb-6 text-primary-dark">
           Create an Account
         </h1>
         <div className="form-group">
-          <label htmlFor="firstname" className="text-lg">
+          <label htmlFor="firstname" className="w-1/3 text-lg">
             First Name
           </label>
           <input
@@ -60,12 +63,12 @@ export default function SignupPage() {
             className="input-field"
             {...register("firstname", { required: true })}
           />
+        </div>
           {errors.firstname && (
             <span className="text-red-600">This field is required</span>
           )}
-        </div>
         <div className="form-group">
-          <label htmlFor="lastname" className="text-lg">
+          <label htmlFor="lastname" className="w-1/3 text-lg">
             Last Name
           </label>
           <input
@@ -75,12 +78,12 @@ export default function SignupPage() {
             className="input-field"
             {...register("lastname", { required: true })}
           />
+        </div>
           {errors.lastname && (
             <span className="text-red-600">This field is required</span>
           )}
-        </div>
         <div className="form-group">
-          <label htmlFor="email" className="text-lg">
+          <label htmlFor="email" className="w-1/3 text-lg">
             Email
           </label>
           <input
@@ -90,13 +93,13 @@ export default function SignupPage() {
             className="input-field"
             {...register("email", { required: true })}
           />
+        </div>
           {errors.email && (
             <span className="text-red-600">This field is required</span>
           )}
-        </div>
 
         <div className="form-group">
-          <label htmlFor="password" className="text-lg">
+          <label htmlFor="password" className="w-1/3 text-lg">
             Password
           </label>
           <input
@@ -106,29 +109,29 @@ export default function SignupPage() {
             className="input-field"
             {...register("password", { required: true })}
           />
+        </div>
           {errors.password && (
             <span className="text-red-600">This field is required</span>
           )}
-        </div>
-        <div className="form-group text-center">
+        <p className="text-sm text-center my-3">
+          Already have an account?{" "}
+          <Link
+            to="/login"
+            className="text-primary-dark font-semibold hover:underline"
+          >
+            Login
+          </Link>
+        </p>
+        <div className=" text-center">
           <button
             className="button w-fit bg-primary-dark hover:bg-primary-light text-white font-semibold rounded focus:outline-none focus:ring-2 focus:ring-primary-light focus:ring-opacity-50"
             type="submit"
           >
             Sign Up
           </button>
-          <p className="mt-4 text-sm">
-            Already have an account?{" "}
-            <Link
-              to="/login"
-              className="text-primary-dark font-semibold hover:underline"
-            >
-              Login
-            </Link>
-          </p>
         </div>
       </form>
       {message && <MessageBanner type={messageType} message={message} />}
-    </div>
+    </section>
   );
 }

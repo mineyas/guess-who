@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { addCharacter } from "../../api/axios";
 import { Icon } from "@iconify/react";
+import MessageBanner from "../MessageBanner";
 
 export default function ModalAdd({ isOpen, setIsOpen, reloadCharacters }) {
   const {
@@ -13,26 +14,7 @@ export default function ModalAdd({ isOpen, setIsOpen, reloadCharacters }) {
     resetField,
     formState: { errors },
   } = useForm();
-  // const [formData, setFormData] = useState({
-  //   name: "",
-  //   gender: "",
-  //   hairColor: "",
-  //   eyeColor: "",
-  //   facialHair: "",
-  //   glasses: "",
-  //   hat: "",
-  //   file: null,
-  //   image: null,
-  // });
-  const defaultValues = {
-    name: "",
-    gender: "",
-    hairColor: "",
-    eyeColor: "",
-    facialHair: "",
-    glasses: "",
-    hat: "",
-  };
+
   const [selectedOptions, setSelectedOptions] = useState({
     gender: "",
     hairColor: "",
@@ -47,12 +29,16 @@ export default function ModalAdd({ isOpen, setIsOpen, reloadCharacters }) {
   const [file, setFile] = useState();
 
   const genderTypes = ["male", "female"];
-  const eyeColors = ["Blue", "Green", "Brown", "Other"];
-  const hairColors = ["Black", "Brown", "Blonde", "Red", "Other"];
+  const eyeColors = ["Black", "Brown", "Blue", "Green", "Other"];
+  const hairColors = ["Black", "Brown", "Blonde", "Red", "Gray", "Other"];
   const yesOrno = ["yes", "no"];
 
+  // const handleFileChange = (event) => {
+  //   const file = event.target.files[0];
+  //   setSelectedFile(file);
+  // };
   function handleChange(e) {
-    console.log(e.target.files);
+    console.log(e.target.files[0].name, "rrrr file");
     setFile(URL.createObjectURL(e.target.files[0]));
   }
 
@@ -68,12 +54,6 @@ export default function ModalAdd({ isOpen, setIsOpen, reloadCharacters }) {
       formData.append("glasses", data.glasses);
       formData.append("hat", data.hat);
       formData.append("image", data.image[0]);
-
-      // const imageFile = data.image[0];
-      // const imageURL = URL.createObjectURL(imageFile);
-      // console.log("Image URL:", imageURL);
-
-      // setSelectedImage(imageURL);
 
       const response = await addCharacter(formData);
       console.log("Response:", response);
@@ -105,6 +85,7 @@ export default function ModalAdd({ isOpen, setIsOpen, reloadCharacters }) {
 
   const closeModal = () => {
     setIsOpen(false);
+    setFile(null);
     setSelectedOptions({
       gender: "",
       hairColor: "",
@@ -140,7 +121,7 @@ export default function ModalAdd({ isOpen, setIsOpen, reloadCharacters }) {
                 <img
                   src={file}
                   alt="selected avatar"
-                  className="mx-auto max-w-60"
+                  className="mx-auto w-60"
                 />
               ) : (
                 <img
@@ -149,25 +130,30 @@ export default function ModalAdd({ isOpen, setIsOpen, reloadCharacters }) {
                   className="mx-auto max-w-60 rounded-full"
                 />
               )}
-
-              <label htmlFor="image" className="cursor-pointer">
+              <label
+                htmlFor="image"
+                className="cursor-pointer w-full text-center"
+              >
                 Upload Image
-                <Icon
-                  icon={"solar:upload-linear"}
-                  width={30}
-                  className="cursor-pointer bg-accent2-dark text-white hover:bg-accent2-light hover:text-accent2-dark rounded-md p-2 w-24 h-10"
-                />
+                {/* <Icon
+                    icon={"solar:upload-linear"}
+                    width={30}
+                    className="cursor-pointer bg-accent2-dark text-white hover:bg-accent2-light hover:text-accent2-dark rounded-md p-2 w-24 h-10"
+                  /> */}
+                {/* <p>{file}</p> */}
                 <input
                   type="file"
                   id="image"
                   accept="image/*"
-                  {...register("image")}
+                  {...register("image", { required: true })}
                   onChange={handleChange}
-                  className=""
-                  style={{ display: "none" }}
+                  className="w-full"
                 />
               </label>
             </div>
+            {errors.image && (
+              <span className="text-red-600">This field is required</span>
+            )}
           </div>
           <div className="w-3/4 border border-green-500">
             <span>
@@ -180,9 +166,12 @@ export default function ModalAdd({ isOpen, setIsOpen, reloadCharacters }) {
                   name="name"
                   id="name"
                   className="input-field"
-                  {...register("name")}
+                  {...register("name", { required: true })}
                 />
               </div>
+              {errors.name && (
+                <span className="text-red-600">This field is required</span>
+              )}
               <div className="form-group">
                 <label className="title">Gender</label>
                 <div className="radio-container">
@@ -200,13 +189,16 @@ export default function ModalAdd({ isOpen, setIsOpen, reloadCharacters }) {
                         type="radio"
                         name="gender"
                         value={gender}
-                        {...register("gender")}
+                        {...register("gender", { required: true })}
                       />
                       {gender}
                     </label>
                   ))}
                 </div>
               </div>
+              {errors.gender && (
+              <span className="text-red-600">This field is required</span>
+            )}
               <div className="form-group">
                 <label htmlFor="hairColor" className="title">
                   Hair Color
@@ -226,13 +218,16 @@ export default function ModalAdd({ isOpen, setIsOpen, reloadCharacters }) {
                         type="radio"
                         name="hairColor"
                         value={color}
-                        {...register("hairColor")}
+                        {...register("hairColor", { required: true })}
                       />
                       {color}
                     </label>
                   ))}
                 </div>
               </div>
+              {errors.hairColor && (
+              <span className="text-red-600">This field is required</span>
+            )}
               <div className="form-group">
                 <label htmlFor="eyeColor" className="title">
                   Eye Color
@@ -252,13 +247,16 @@ export default function ModalAdd({ isOpen, setIsOpen, reloadCharacters }) {
                         type="radio"
                         name="eyeColor"
                         value={color}
-                        {...register("eyeColor")}
+                        {...register("eyeColor", { required: true })}
                       />
                       {color}
                     </label>
                   ))}
                 </div>
               </div>
+              {errors.eyeColor && (
+              <span className="text-red-600">This field is required</span>
+            )}
               <div className="form-group">
                 <label className="title">Facial Hair</label>
                 <div className="radio-container">
@@ -276,13 +274,16 @@ export default function ModalAdd({ isOpen, setIsOpen, reloadCharacters }) {
                         type="radio"
                         name="facialHair"
                         value={e}
-                        {...register("facialHair")}
+                        {...register("facialHair", { required: true })}
                       />
                       {e}
                     </label>
                   ))}
                 </div>
               </div>
+              {errors.facialHair && (
+              <span className="text-red-600">This field is required</span>
+            )}
               <div className="form-group">
                 <label className="title">Glasses</label>
                 <div className="radio-container">
@@ -300,13 +301,16 @@ export default function ModalAdd({ isOpen, setIsOpen, reloadCharacters }) {
                         type="radio"
                         name="glasses"
                         value={e}
-                        {...register("glasses")}
+                        {...register("glasses", { required: true })}
                       />
                       {e}
                     </label>
                   ))}
                 </div>
               </div>
+              {errors.glasses && (
+              <span className="text-red-600">This field is required</span>
+            )}
               <div className="form-group">
                 <label className="title">Hat</label>
                 <div className="radio-container">
@@ -322,13 +326,16 @@ export default function ModalAdd({ isOpen, setIsOpen, reloadCharacters }) {
                         type="radio"
                         name="hat"
                         value={e}
-                        {...register("hat")}
+                        {...register("hat", { required: true })}
                       />
                       {e}
                     </label>
                   ))}
                 </div>
               </div>
+              {errors.hat && (
+              <span className="text-red-600">This field is required</span>
+            )}
             </span>
 
             <span className="button-container">
@@ -348,6 +355,7 @@ export default function ModalAdd({ isOpen, setIsOpen, reloadCharacters }) {
             </span>
           </div>
         </form>
+        {message && <MessageBanner type={messageType} message={message} />}
       </div>
     </section>
   );

@@ -1,7 +1,7 @@
 export default function PlayerProfilePage() {
     return (
-        <div>
+        <section>
             <h1>Admin</h1>
-        </div>
+        </section>
     );
 }

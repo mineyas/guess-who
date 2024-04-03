@@ -7,6 +7,7 @@ const generateToken = (user) => {
     expiresIn: "1h",
   });
 };
+console.log(process.env.JWT_SECRET, "user"),
 console.log(generateToken, "gen token");
 
 exports.getLogout = (req, res) => {

@@ -30,7 +30,7 @@ export default function HomePage() {
   return (
     <>
       {/* <Navbar username={name + " (" + role + ")"} onLogout={handleLogout} /> */}
-      <div className="flex flex-col items-center justify-center h-screen bg-accent4-dark">
+      <section className="flex flex-col items-center justify-center h-screen bg-accent4-dark">
         <div className="p-8 bg-white rounded-lg shadow">
           <h1 className="text-3xl font-bold mb-6 text-primary-dark">
             Welcome to Guess Who!
@@ -51,7 +51,7 @@ export default function HomePage() {
           </div>
         </div>
         {message && <MessageBanner type={messageType} message={message} />}
-      </div>
+      </section>
     </>
   );
 }
