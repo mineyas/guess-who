@@ -10,7 +10,7 @@ exports.getAllUsers = async (req, res) => {
       role: "player",
     });
     // const users = await User.find({});
-    console.log(users, "users");
+    console.log(users, "usersjkjk");
     res.status(200).json({ users });
   } catch (error) {
     console.error(error);
