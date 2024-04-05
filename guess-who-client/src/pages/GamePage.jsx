@@ -2,14 +2,18 @@ import { Icon } from "@iconify/react";
 import { useState } from "react";
 import femme from "../assets/img/femme.png";
 import qui from "../assets/img/quii.png";
+import { useNavigate } from "react-router-dom";
 
 export default function GamePage() {
+  const navigate = useNavigate();
   const [isDeleted, setIsDeleted] = useState(true);
 
   function handleDelete() {
     setIsDeleted(true);
   }
-
+  const leaveGame = () => {
+    navigate("/");
+  };
   return (
     <section className="parent-container">
       <h1>Gameee</h1>
@@ -40,7 +44,10 @@ export default function GamePage() {
             </button>
           </div>
 
-          <button className="flex_row items-center gap-1 leave-game rounded-full">
+          <button
+            onClick={leaveGame}
+            className="flex_row items-center gap-1 leave-game rounded-full"
+          >
             <p>Leave game</p>
             <Icon icon="vaadin:exit" width={20} className="mx-auto" />
           </button>

@@ -20,7 +20,11 @@ export default function LoginPage() {
         localStorage.setItem("email", response.user.email);
         localStorage.setItem("firstname", response.user.firstname);
         localStorage.setItem("role", response.user.role);
+        localStorage.setItem("id", response.user._id);
 
+        console.log(response, "response login user");
+        console.log(response.user._id, "idid login user user");
+        
         setMessage("Login successful");
         setMessageType("success");
         if (response.user.role === "admin") {
@@ -57,9 +61,9 @@ export default function LoginPage() {
             {...register("email", { required: true })}
           />
         </div>
-          {errors.email && (
-            <span className="text-red-600">This field is required</span>
-          )}
+        {errors.email && (
+          <span className="text-red-600">This field is required</span>
+        )}
         <div className="form-group">
           <label htmlFor="password" className="w-1/3 text-lg">
             Password
@@ -73,8 +77,8 @@ export default function LoginPage() {
           />
         </div>
         {errors.password && (
-            <span className="text-red-600">This field is required</span>
-          )}
+          <span className="text-red-600">This field is required</span>
+        )}
         <div className="form-group">
           <Link
             to="/forgot"

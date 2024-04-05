@@ -17,6 +17,7 @@ import { logoutGet } from "./api/axios";
 import Users from "./components/Admin/Users";
 import Characters from "./components/Admin/Characters";
 import GamePage from "./pages/GamePage";
+import Info from "./components/Profile/Info";
 // import './assets/global.css'
 
 function App() {
@@ -62,6 +63,10 @@ function App() {
           exact
           path="/"
           element={isLoggedIn() ? <HomePage /> : <Navigate to="/login" />}
+        />
+        <Route
+          path="/profile"
+          element={isLoggedIn() ? <Info /> : <Navigate to="/login" />}
         />
         <Route
           path="/game"

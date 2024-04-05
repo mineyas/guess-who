@@ -13,13 +13,18 @@ const gameSchema = new mongoose.Schema({
       required: true,
     },
   ],
-  charachters: [
+  characters: [
     {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Character",
       required: true,
     },
   ],
+  selectedCharacter: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Character",
+    required: true,
+  },
   currentTurn: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Player",

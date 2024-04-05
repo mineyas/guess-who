@@ -58,6 +58,12 @@ exports.createPlayer = async (req, res) => {
 exports.getOnePlayer = async (req, res) => {
   try {
     const player = await Player.findById(req.params.id);
+    console.log(player, "player one by id");
+    if (!player) {
+      return res
+        .status(statusCodes.statusCodes.NOT_FOUND)
+        .json({ message: messages.messages.NOT_FOUND });
+    }
     res.status(statusCodes.statusCodes.OK).json({ player });
   } catch (error) {
     console.error(error);
@@ -66,26 +72,49 @@ exports.getOnePlayer = async (req, res) => {
       .json({ message: "Error retrieving player" });
   }
 };
-
+exports.getPlayerByUserId = async (req, res) => {
+  try {
+    const player = await Player.findOne({ userId: req.params.userId });
+    console.log(player, "player one by user id");
+    if (!player) {
+      return res
+        .status(statusCodes.statusCodes.NOT_FOUND)
+        .json({ message: messages.messages.NOT_FOUND, player });
+    }
+    res.status(statusCodes.statusCodes.OK).json({ player });
+  } catch (error) {
+    console.error(error);
+    res
+      .status(statusCodes.statusCodes.INTERNAL_SERVER_ERROR)
+      .json({ message: "Error retrieving player" });
+  }
+};
 exports.editPlayer = async (req, res) => {
   try {
     const player = await Player.findById(req.params.id);
     player.username = req.body.username;
     player.avatar = req.body.avatar;
     await player.save();
-    res.status(statusCodes.statusCodes.OK).json({ message: messages.messages.UPDATE_SUCCESS, player });
+    res
+      .status(statusCodes.statusCodes.OK)
+      .json({ message: messages.messages.UPDATE_SUCCESS, player });
   } catch (error) {
     console.error(error);
-    res.status(statusCodes.statusCodes.INTERNAL_SERVER_ERROR).json({ message: messages.messages.UPDATE_FAIL });
+    res
+      .status(statusCodes.statusCodes.INTERNAL_SERVER_ERROR)
+      .json({ message: messages.messages.UPDATE_FAIL });
   }
 };
-
 exports.deletePlayer = async (req, res) => {
   try {
     const player = await Player.findByIdAndDelete(req.params.id);
-    res.status(statusCodes.statusCodes.OK).json({ message: messages.messages.DELETE_SUCCESS, player });
+    res
+      .status(statusCodes.statusCodes.OK)
+      .json({ message: messages.messages.DELETE_SUCCESS, player });
   } catch (error) {
     console.error(error);
-    res.status(statusCodes.statusCodes.INTERNAL_SERVER_ERROR).json({ message: messages.messages.DELETE_FAIL });
+    res
+      .status(statusCodes.statusCodes.INTERNAL_SERVER_ERROR)
+      .json({ message: messages.messages.DELETE_FAIL });
   }
 };

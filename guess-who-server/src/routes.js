@@ -5,6 +5,7 @@ const Character = require("./controllers/Character");
 const Profile = require("./controllers/Profile");
 const User = require("./controllers/User");
 const Player = require("./controllers/Player");
+const Game = require("./controllers/Game");
 const check = require("./middleware/isAdmin");
 const image = require("./middleware/multerMiddleware");
 module.exports = (app) => {
@@ -16,6 +17,7 @@ module.exports = (app) => {
   app.get("/logout", Login.getLogout);
 
   app.get("/profile", Profile.getProfile);
+  
   // ADMIN
   app.get("/admin", check.isAdmin, User.getAdmin);
   app.get(
@@ -41,10 +43,31 @@ module.exports = (app) => {
   );
 
   // PLAYER
-
   app.get("/players", Player.getAllPlayers);
   app.post("/player/add", Player.createPlayer);
-  app.get("/players/:id", Player.getOnePlayer);
-  app.post("/players/edit/:id", Player.editPlayer);
-  app.delete("/players/delete/:id", Player.deletePlayer);
+  app.get("/player/:id", Player.getOnePlayer);
+  app.get("/player/user/:userId", Player.getPlayerByUserId);
+  app.post("/player/edit/:id", Player.editPlayer);
+  app.delete("/player/delete/:id", Player.deletePlayer);
+
+  // GAME
+  app.get("/games", Game.getAllGames);
+  app.post("/game/start", Game.createGame);
+  app.get("/game/:id", Game.getOneGame);
+  app.post("/game/edit/:id", Game.editGame);
+  app.delete("/game/delete/:id", Game.deleteGame);
+
+  // ANSWER
+  // app.get("/answer", Player.getAllPlayers);
+  // app.post("/answer/add", Player.createPlayer);
+  // app.get("/answer/:id", Player.getOnePlayer);
+  // app.post("/answer/edit/:id", Player.editPlayer);
+  // app.delete("/answer/delete/:id", Player.deletePlayer);
+
+  // CHARACTERS
+  app.get("/characters", Character.getAllCharacters);
+  // app.post("/character/add", Player.createPlayer);
+  // app.get("/character/:id", Player.getOnePlayer);
+  // app.post("/character/edit/:id", Player.editPlayer);
+  // app.delete("/character/delete/:id", Player.deletePlayer);
 };

@@ -32,15 +32,18 @@ export const signupPost = async (dataForm) =>
 
 export const loginPost = async (dataForm) =>
   fetchData("/login", "post", dataForm);
+export const logoutGet = async () => fetchData("/logout", "get");
 
-  export const addCharacter = async (dataForm) =>
+export const addCharacter = async (dataForm) =>
   fetchData("/admin/character", "post", dataForm);
 
-
-export const logoutGet = async () => fetchData("/logout", "get");
+export const addPlayer = async (dataForm) =>
+  fetchData("/player/add", "post", dataForm);
 
 export const loadUsers = async () => fetchData("/admin/users", "get");
 export const loadCharacters = async () => fetchData("/admin/character", "get");
-
+export const getPlayer = async (id) => fetchData("/player/" + id, "get");
+export const getPlayerByUserId = async (userId) =>
+  fetchData("/player/user/" + userId, "get");
 export const deleteCharacter = async (id) =>
   fetchData("/admin/character/delete/" + id, "delete");
