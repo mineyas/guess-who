@@ -8,13 +8,14 @@ exports.getAllPlayers = async (req, res) => {
     const players = await Player.find({});
     console.log(players, "players");
 
-    res.status(200).json({ players });
+    res.status(statusCodes.statusCodes.OK).json({ players });
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Error retrieving players" });
   }
 };
 exports.createPlayer = async (req, res) => {
+  console.log(req.body);
   try {
     const user = await User.findById(req.body.userId);
     console.log(user, "user player with iddd");
@@ -22,11 +23,10 @@ exports.createPlayer = async (req, res) => {
     if (!user) {
       return res
         .status(statusCodes.statusCodes.NOT_FOUND)
-        .json({ message: messages.messages.NOT_FOUND });
+        .json({ message: messages.messages.NOT_FOUND, user });
     }
 
     const { username, avatar } = req.body;
-    // console.log(userId, "ididid playerrr");
 
     const playerData = req.body;
     console.log(playerData, "playerData");
@@ -47,6 +47,11 @@ exports.createPlayer = async (req, res) => {
     console.log(player, "new player");
 
     await player.save();
+
+    user.playerId = player._id;
+    await user.save();
+    console.log(user, "user updated");
+
     res
       .status(statusCodes.statusCodes.OK)
       .json({ message: messages.messages.CREATED, player });
@@ -58,7 +63,6 @@ exports.createPlayer = async (req, res) => {
 exports.getOnePlayer = async (req, res) => {
   try {
     const player = await Player.findById(req.params.id);
-    console.log(player, "player one by id");
     if (!player) {
       return res
         .status(statusCodes.statusCodes.NOT_FOUND)
@@ -108,6 +112,14 @@ exports.editPlayer = async (req, res) => {
 exports.deletePlayer = async (req, res) => {
   try {
     const player = await Player.findByIdAndDelete(req.params.id);
+
+    const user = await User.findOneAndUpdate(
+      { playerId: req.params.id },
+      { playerId: null },
+      { new: true }
+    );
+    user.save();
+
     res
       .status(statusCodes.statusCodes.OK)
       .json({ message: messages.messages.DELETE_SUCCESS, player });

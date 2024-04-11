@@ -41,7 +41,6 @@ exports.createGame = async (req, res) => {
       gameData.selectedCharacter
     );
     const allCharacters = await Character.find({}, "_id");
-    // const charactersIds = allCharacters.map((character) => character._id);
     const charactersIds = allCharacters.map((character) => character._id.toString());
 
     console.log(playersExist, "playersExist");
@@ -91,7 +90,6 @@ exports.createGame = async (req, res) => {
     res.status(500).json({ message: messages.messages.ERROR_CREATION });
   }
 };
-
 exports.getOneGame = (req, res) => {
   try {
     res

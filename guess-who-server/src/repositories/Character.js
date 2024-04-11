@@ -33,12 +33,14 @@ const characterSchema = new mongoose.Schema({
     enum: ["yes", "no"],
     default: false,
   },
-  // accessories: {
-  //   type: [String],
-  // },
+  accessories: {
+    type: String,
+    enum: ["yes", "no"],
+    default: 'no',
+  },
   image: {
     type: String,
-    required: true,
+    // required: true,
   },
 });
 
