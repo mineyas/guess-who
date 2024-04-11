@@ -1,21 +1,21 @@
-import { Link, useNavigate } from "react-router-dom";
-import Navbar from "../components/Navbar";
+import { useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
+import Lottie from "react-lottie";
+import { useNavigate } from "react-router-dom";
 import {
   addPlayer,
-  getPlayer,
-  getPlayerByUserId,
-  logoutGet,
-} from "../api/axios";
-import { useEffect, useState } from "react";
+  getUser,
+  logoutGet
+} from "../api/routes";
+import loadingAnimation from "../assets/animations/load.json";
 import MessageBanner from "../components/MessageBanner";
-import { useForm } from "react-hook-form";
-import axios from "axios";
 
 export default function HomePage() {
-  const name = localStorage.getItem("firstname");
-  const role = localStorage.getItem("role");
+  const name = sessionStorage.getItem("firstname");
+  const role = sessionStorage.getItem("role");
   const navigate = useNavigate();
-  const userId = localStorage.getItem("id");
+  const userId = sessionStorage.getItem("id");
+  console.log(userId, "userid session");
 
   const {
     register,
@@ -25,15 +25,19 @@ export default function HomePage() {
 
   const [message, setMessage] = useState("");
   const [messageType, setMessageType] = useState("");
+  const [loadingMessage, setLoadingMessage] = useState("");
   const [addUsername, setAddUsername] = useState(false);
-
+  const [user, setUser] = useState({});
+  const [player, setPlayer] = useState({});
+  const [loading, setLoading] = useState(false);
+  console.log(user, "user here");
   const handleLogout = () => {
     try {
       logoutGet();
-      localStorage.removeItem("token");
-      localStorage.removeItem("email");
-      localStorage.removeItem("role");
-      localStorage.removeItem("firstname");
+      sessionStorage.removeItem("token");
+      sessionStorage.removeItem("email");
+      sessionStorage.removeItem("role");
+      sessionStorage.removeItem("firstname");
       setMessage("Logout successful");
       setMessageType("success");
       navigate("/login");
@@ -44,87 +48,80 @@ export default function HomePage() {
     }
   };
 
-  // const checkPlayerExists = async (playerId) => {
-  //   // try {
-  //   //   const player = await getPlayer(userId);
-  //   //   console.log(player, "playerr");
-  //   //   if (!player) {
-  //   //     setAddUsername(true);
-  //   //   }
-  //   //   // if (player) {
-  //   //   //   setAddUsername(false);
-  //   //   //   navigate("/game");
-  //   //   // } else {
-  //   //   //   setAddUsername(true);
-  //   //   // }
-  //   // } catch (error) {
-  //   //   console.error("Error player:", error.message);
-  //   // }
-  //   try {
-  //     const response = await getPlayer(playerId); // Fetch player by playerId
-  //     if (response.data.player) {
-  //       console.log('Player exists:', response.data.player);
-  //       // Player exists, you can proceed with the game or any other action
-  //     } else {
-  //       console.log('Player does not exist');
-  //       // Player doesn't exist, you may want to prompt the user to create a new player
-  //     }
-  //   } catch (error) {
-  //     console.error('Error checking player existence:', error.message);
-  //     // Handle error
-  //   }
-  // };
-
-  const checkByUserId = async () => {
+  const fetchUser = async () => {
     try {
-      const response = await axios.get(`http://localhost:3001/player/user/${userId}`);
-      const result = response.player;
-      console.log(result, 'ressssss');
-
-      if (!result || result === null) {
-        setAddUsername(true);
-      }
-      navigate("/game");
-      console.log(userId, "plauserrrr idddd yerr");
-      console.log(response.player, "playerr");
-
-      // return result;
-    } catch (error) {
-      console.error("Error retrieving player:", error);
-      throw new Error("Error retrieving player");
-    }
-  };
-  const newGame = async (data) => {
-    try {
-      const response = await addPlayer(data);
-      navigate("/game");
+      const response = await getUser(userId);
+      console.log(response.user, "current user");
+      setUser(response.user);
     } catch (error) {
       console.error("Error player:", error.message);
-      setMessage("Error player");
-      setMessageType("error");
     }
   };
-  const goToGame = () => {
-    setAddUsername(true);
+  const checkPlayerId = () => {
+    fetchUser();
+
+    if (!user.playerId) {
+      setAddUsername(true);
+    } else {
+      setLoading(true);
+      setTimeout(() => {
+        navigate("/game");
+      }, 3000);
+    }
   };
+
+  const onSubmit = async (data) => {
+    // setLoadingMessage("Adding character...");
+    console.log(data, "form data add player");
+    try {
+      const response = await addPlayer({
+        userId: user._id,
+        username: data.username,
+      });
+      const newPlayer = response.player;
+      setPlayer(newPlayer);
+      fetchUser();
+      setMessage("Character added successfully");
+      setMessageType("success");
+
+      setTimeout(() => {
+        setLoading(true);
+        navigate("/game");
+      }, 4000);
+    } catch (error) {
+      setMessage("Error adding character");
+      setMessageType("error");
+      console.error("Error adding character:", error.message);
+    }
+  };
+
   const goToScores = () => {
     navigate("/scores");
   };
 
+  const defaultOption = {
+    loop: true,
+    autoplay: true,
+    animationData: loadingAnimation,
+    rendererSettings: {
+      preserveAspectRatio: "xMidYMid slice",
+    },
+  };
+
   useEffect(() => {
-    // checkByUserId();
+    fetchUser();
   }, []);
   return (
     <>
       {/* <Navbar username={name + " (" + role + ")"} onLogout={handleLogout} /> */}
-      <section className="flex flex-col items-center justify-center h-screen bg-accent4-dark">
+      <section className="section h-[90vh] bg-accent4-dark">
         <div className="p-8 bg-white rounded-lg shadow">
           <h1 className="text-3xl font-bold mb-6 text-primary-dark">
             Welcome to Guess Who!
           </h1>
           <div className="flex justify-evenly mb-6">
             <button
-              onClick={checkByUserId}
+              onClick={checkPlayerId}
               className="button bg-accent2-dark hover:bg-accent2-light hover:text-accent2-dark text-white font-semibold py-2 px-4 rounded focus:outline-none focus:ring-2 focus:ring-primary-light focus:ring-opacity-50"
             >
               New game
@@ -137,28 +134,38 @@ export default function HomePage() {
             </button>
           </div>
           {addUsername && (
-            // <span className="flex gap-3 justify-center">
             <form
               action=""
-              onSubmit={handleSubmit(newGame)}
-              className="flex gap-3 justify-center"
+              onSubmit={handleSubmit(onSubmit)}
+              className="text-center"
             >
-              <input
-                type="text"
-                placeholder="Enter username"
-                className="input-field"
-              />
-              <button
-                type="submit"
-                // onClick={newGame}
-                className="button bg-accent2-dark hover:bg-accent2-light hover:text-accent2-dark text-white font-semibold py-2 px-4 rounded focus:outline-none focus:ring-2 focus:ring-primary-light focus:ring-opacity-50"
-              >
-                Go
-              </button>
+              <span className="flex gap-3 justify-center">
+                <input
+                  type="text"
+                  placeholder="Enter username"
+                  className="input-field"
+                  id="username"
+                  {...register("username", { required: true })}
+                />
+                <button
+                  type="submit"
+                  className="button bg-accent2-dark hover:bg-accent2-light hover:text-accent2-dark text-white font-semibold py-2 px-4 rounded focus:outline-none focus:ring-2 focus:ring-primary-light focus:ring-opacity-50"
+                >
+                  Go
+                </button>
+              </span>
+              {errors.username && (
+                <span className="text-red-600">This field is required</span>
+              )}
             </form>
-            // </span>
           )}
         </div>
+        {loading && (
+          <div className="loading">
+            <Lottie options={defaultOption} height={300} width={300} />
+            {loadingMessage}
+          </div>
+        )}
         {message && <MessageBanner type={messageType} message={message} />}
       </section>
     </>
