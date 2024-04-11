@@ -56,7 +56,10 @@ h1 {
   margin-bottom: 1.5rem;
   font-weight: 700;
 }
-
+input[type="file"] {
+  color: transparent;
+  background-color: var(--color-accent2-dark);
+}
 .flex_col {
   display: flex;
   flex-direction: column;
@@ -66,9 +69,38 @@ h1 {
   flex-direction: row;
 }
 
+.section {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
 .parent-container {
-  margin: 2.5rem auto;
-  width: 90%;
+  margin: 2rem auto;
+  width: 95%;
+}
+
+.container {
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+  padding: 40px;
+  scroll-behavior: smooth;
+  overflow: scroll;
+}
+.modal-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  overflow: scroll;
 }
 .active {
   background-color: var(--color-accent2-light);
@@ -83,39 +115,61 @@ h1 {
   right: 20%;
   bottom: 5%;
 }
-
 .success {
   background-color: #4caf50;
   color: white;
 }
-
 .error {
   background-color: #f44336;
   color: white;
 }
-.container {
-  background-color: white;
-  border-radius: 8px;
-  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
-  padding: 40px;
-  max-width: 500px;
-  height: 100vh;
-  scroll-behavior: smooth;
-  overflow: scroll;
+.info {
+  background-color: var(--color-accent2-dark);
+  color: white;
 }
 
+.admin-card {
+  position: relative;
+  width: 33%;
+  cursor: pointer;
+  align-items: center;
+  border-bottom-right-radius: 5rem;
+  border-top-left-radius: 6rem;
+}
+.admin-card-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 76%;
+  color: white;
+}
+.admin-card-counter {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  border-bottom-right-radius: 5rem;
+  width: 100%;
+  text-align: center;
+  overflow: hidden;
+  background: white;
+}
+
+.disabled-input[disabled] {
+  background-color: #f2f2f2;
+  color: #888;
+  cursor: not-allowed;
+}
 .form-group {
   display: flex;
   align-items: center;
   margin-bottom: 0.5rem;
-  border: 1px solid pink;
 }
 .form-group .title {
   width: 20%;
-  border: 1px solid red;
+  color: var(--color-primary);
 }
 .input-field {
-  /* width: 100%; */
   padding: 12px;
   border: 1px solid #ccc;
   border-radius: 5px;
@@ -137,9 +191,6 @@ h1 {
   background-repeat: no-repeat;
   background-size: cover;
   height: 100vh;
-}
-.table-container {
-  /* margin-top: 40px; */
 }
 
 .users-table {
@@ -208,20 +259,6 @@ h1 {
   flex-wrap: wrap;
 }
 
-.modal-container {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 9999;
-  overflow: scroll;
-}
-
 .button-container {
   display: flex;
   flex-direction: row;
@@ -231,7 +268,8 @@ h1 {
 
 .question-bar {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  align-items: center;
   gap: 1rem;
   justify-content: space-between;
 }
@@ -256,11 +294,13 @@ h1 {
   border: 1px solid var(--color-accent2);
 }
 .board .card-game {
+  cursor: pointer;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  width: 150px;
-  height: 180px;
+  /* justify-content: space-between; */
+  height: fit-content;
+  /* width: 150px;
+  height: 180px; */
   border-radius: 8px;
   background-color: var(--color-primary-light);
   position: relative;
@@ -269,7 +309,8 @@ h1 {
 .board .card-game:hover {
   background-color: var(--color-primary);
 }
-.board .card-game .card-deleted, .opponent-board .opponent-card .opponent-deleted {
+.board .card-game .card-deleted,
+.opponent-board .opponent-card .opponent-deleted {
   width: 100%;
   height: 100%;
   border-radius: 8px;
@@ -283,9 +324,6 @@ h1 {
 }
 .board .card-game .card-name,
 .players .card p {
-  /* bottom: 0;
-  position: absolute;
-  width: 100%; */
   text-align: center;
   color: white;
   font-size: 1.25rem;
@@ -308,14 +346,26 @@ h1 {
   border-radius: 8px;
   background-color: var(--color-accent3);
 }
-.opponent-board .opponent-card{
-  width: 50px;
-  height: 60px;
+.opponent-board .opponent-card {
+  /* width: 50px;
+  height: 60px; */
+  padding: 4px;
   border-radius: 8px;
   background-color: var(--color-accent1-dark);
   position: relative;
 }
-/* .opponent-board .opponent-card:hover{
-  background-color: var(--color-accent1-light);
 
-} */
+@media screen and (min-width: 1024px) {
+  .question-bar {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    justify-content: space-between;
+  }
+  .question-bar-buttons,
+  .players-and-preview,
+  .players {
+    flex-direction: column;
+  }
+}
