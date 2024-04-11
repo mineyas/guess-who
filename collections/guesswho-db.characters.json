@@ -1,0 +1,174 @@
+[{
+  "_id": {
+    "$oid": "6617bf37ecdb04a4b10380be"
+  },
+  "name": "Lina",
+  "gender": "female",
+  "hairColor": "Brown",
+  "eyeColor": "Brown",
+  "facialHair": "no",
+  "glasses": "no",
+  "hat": "no",
+  "image": "1712832311391-f1.png",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6617bf4decdb04a4b10380c1"
+  },
+  "name": "Alan",
+  "gender": "male",
+  "hairColor": "Brown",
+  "eyeColor": "Brown",
+  "facialHair": "no",
+  "glasses": "no",
+  "hat": "no",
+  "image": "1712832333523-h2.png",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6617bf6decdb04a4b10380c4"
+  },
+  "name": "Brigitte",
+  "gender": "female",
+  "hairColor": "Blonde",
+  "eyeColor": "Brown",
+  "facialHair": "no",
+  "glasses": "no",
+  "hat": "no",
+  "image": "1712832365997-f2.png",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6617bf8becdb04a4b10380c7"
+  },
+  "name": "Jack",
+  "gender": "male",
+  "hairColor": "Brown",
+  "eyeColor": "Brown",
+  "facialHair": "no",
+  "glasses": "no",
+  "hat": "no",
+  "image": "1712832395955-h3.png",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6617bfa5ecdb04a4b10380ca"
+  },
+  "name": "Lia",
+  "gender": "female",
+  "hairColor": "Brown",
+  "eyeColor": "Brown",
+  "facialHair": "no",
+  "glasses": "no",
+  "hat": "no",
+  "image": "1712832421464-f3.png",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6617bfbdecdb04a4b10380cd"
+  },
+  "name": "Jhon",
+  "gender": "male",
+  "hairColor": "Gray",
+  "eyeColor": "Brown",
+  "facialHair": "yes",
+  "glasses": "no",
+  "hat": "no",
+  "image": "1712832445835-h4.png",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6617c5935cfd9f7506aec134"
+  },
+  "name": "Giuly",
+  "gender": "female",
+  "hairColor": "Brown",
+  "eyeColor": "Brown",
+  "facialHair": "no",
+  "glasses": "no",
+  "hat": "yes",
+  "accessories": "yes",
+  "image": "1712833939112-f4.png",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6617c5ac5cfd9f7506aec137"
+  },
+  "name": "Susy",
+  "gender": "female",
+  "hairColor": "Red",
+  "eyeColor": "Brown",
+  "facialHair": "no",
+  "glasses": "no",
+  "hat": "no",
+  "accessories": "yes",
+  "image": "1712833964299-f5.png",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6617c5c05cfd9f7506aec13a"
+  },
+  "name": "Mia",
+  "gender": "female",
+  "hairColor": "Red",
+  "eyeColor": "Brown",
+  "facialHair": "no",
+  "glasses": "no",
+  "hat": "yes",
+  "accessories": "no",
+  "image": "1712833984404-f6.png",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6617c5d65cfd9f7506aec13d"
+  },
+  "name": "Jim",
+  "gender": "male",
+  "hairColor": "Gray",
+  "eyeColor": "Brown",
+  "facialHair": "yes",
+  "glasses": "no",
+  "hat": "no",
+  "accessories": "no",
+  "image": "1712834006895-h5.png",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6617c5ec5cfd9f7506aec140"
+  },
+  "name": "Tommy",
+  "gender": "male",
+  "hairColor": "Brown",
+  "eyeColor": "Brown",
+  "facialHair": "no",
+  "glasses": "no",
+  "hat": "yes",
+  "accessories": "no",
+  "image": "1712834028110-h6.png",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6617ed905cfd9f7506aec26c"
+  },
+  "name": "Lia",
+  "gender": "female",
+  "hairColor": "Red",
+  "eyeColor": "Brown",
+  "facialHair": "no",
+  "glasses": "no",
+  "hat": "yes",
+  "accessories": "no",
+  "image": "1712844176642-f6.png",
+  "__v": 0
+}]

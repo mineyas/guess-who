@@ -1,0 +1,72 @@
+[{
+  "_id": {
+    "$oid": "660ec3730073bef2732e2e01"
+  },
+  "user": {
+    "$oid": "660d33800f5644a6364a28c6"
+  },
+  "username": "nanina",
+  "score": 0,
+  "gamesPlayed": 0,
+  "active": true,
+  "wins": 0,
+  "losses": 0,
+  "date": {
+    "$date": "2024-04-04T15:12:51.831Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6615430413b372a009f363d5"
+  },
+  "userId": {
+    "$oid": "66153e1013b372a009f3637e"
+  },
+  "username": "fff",
+  "score": 0,
+  "gamesPlayed": 0,
+  "active": true,
+  "wins": 0,
+  "losses": 0,
+  "date": {
+    "$date": "2024-04-09T13:30:44.270Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6616b898df758843d415e080"
+  },
+  "userId": {
+    "$oid": "6614f44a6c016003e250d2a5"
+  },
+  "username": "ursula",
+  "score": 0,
+  "gamesPlayed": 0,
+  "active": true,
+  "wins": 0,
+  "losses": 0,
+  "date": {
+    "$date": "2024-04-10T16:04:40.617Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6617cb425cfd9f7506aec19d"
+  },
+  "userId": {
+    "$oid": "6617982d729aa7d4afedd4bd"
+  },
+  "username": "liamsss",
+  "score": 0,
+  "gamesPlayed": 0,
+  "active": true,
+  "wins": 0,
+  "losses": 0,
+  "date": {
+    "$date": "2024-04-11T11:36:34.728Z"
+  },
+  "__v": 0
+}]

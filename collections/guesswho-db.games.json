@@ -1,0 +1,111 @@
+[{
+  "_id": {
+    "$oid": "660fc8ae3df26e44515549c6"
+  },
+  "gameState": "playing",
+  "players": [
+    {
+      "$oid": "660ec3730073bef2732e2e01"
+    },
+    {
+      "$oid": "660ec6e758627115a9e2cc0e"
+    }
+  ],
+  "characters": [
+    {
+      "$oid": "660b90bea3d0a117df06350f"
+    }
+  ],
+  "currentTurn": {
+    "$oid": "660ec3730073bef2732e2e01"
+  },
+  "questions": [],
+  "answers": [],
+  "score": 0,
+  "ended": false,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "660fc8c3626f38f365c93548"
+  },
+  "gameState": "playing",
+  "players": [
+    {
+      "$oid": "660ec3730073bef2732e2e01"
+    },
+    {
+      "$oid": "660ec6e758627115a9e2cc0e"
+    }
+  ],
+  "characters": [
+    {
+      "$oid": "660b90bea3d0a117df06350f"
+    }
+  ],
+  "currentTurn": {
+    "$oid": "660ec3730073bef2732e2e01"
+  },
+  "questions": [],
+  "answers": [],
+  "score": 0,
+  "ended": false,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "660fca9cfdcc80d3b04a18c2"
+  },
+  "gameState": "playing",
+  "players": [
+    {
+      "$oid": "660ec3730073bef2732e2e01"
+    },
+    {
+      "$oid": "660ec6e758627115a9e2cc0e"
+    }
+  ],
+  "characters": [
+    {
+      "$oid": "660b90bea3d0a117df06350f"
+    }
+  ],
+  "currentTurn": {
+    "$oid": "660ec3730073bef2732e2e01"
+  },
+  "questions": [],
+  "answers": [],
+  "score": 0,
+  "ended": false,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "660fe6f740141dfd3dcb2d7b"
+  },
+  "gameState": "paused",
+  "players": [
+    {
+      "$oid": "660ec3730073bef2732e2e01"
+    },
+    {
+      "$oid": "660ec6e758627115a9e2cc0e"
+    }
+  ],
+  "characters": [
+    {
+      "$oid": "660b90bea3d0a117df06350f"
+    }
+  ],
+  "selectedCharacter": {
+    "$oid": "660b90bea3d0a117df06350f"
+  },
+  "currentTurn": {
+    "$oid": "660ec6e758627115a9e2cc0e"
+  },
+  "questions": [],
+  "answers": [],
+  "score": 0,
+  "ended": false,
+  "__v": 0
+}]

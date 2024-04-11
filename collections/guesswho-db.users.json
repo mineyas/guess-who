@@ -1,0 +1,129 @@
+[{
+  "_id": {
+    "$oid": "65f1a6216e6dacd42b83d78c"
+  },
+  "role": "admin",
+  "date": {
+    "$date": "2024-03-13T13:12:01.274Z"
+  },
+  "firstname": "maya",
+  "lastname": "maya",
+  "email": "lia@lia.it",
+  "password": "$2b$10$HGRwE0Z.e7IN42lAweCufOnMq1ds8/eseQdqDgBQzNC5sO8VYns4K",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6614f44a6c016003e250d2a5"
+  },
+  "role": "player",
+  "date": {
+    "$date": "2024-04-09T07:54:50.214Z"
+  },
+  "firstname": "tinafgfg",
+  "lastname": "tinagdf",
+  "email": "tina@tina.it",
+  "password": "$2b$10$aO9FpQA7j4BXOzxYJaJQX.Ga9zO37PchN3ma8d1/08vJD/JJU78Ui",
+  "__v": 0,
+  "playerId": {
+    "$oid": "6616b898df758843d415e080"
+  },
+  "blocked": false
+},
+{
+  "_id": {
+    "$oid": "66152fc85677169d74ffb663"
+  },
+  "role": "player",
+  "date": {
+    "$date": "2024-04-09T12:08:40.673Z"
+  },
+  "firstname": "pio",
+  "lastname": "pio",
+  "email": "pio@pio.it",
+  "password": "$2b$10$uwBUq9S.i2NFvNBw2j6xp.gXl/HPzgmG2gvraXNq..nMiNIFcElcS",
+  "__v": 0,
+  "blocked": false
+},
+{
+  "_id": {
+    "$oid": "6615316c674e770236dca8c3"
+  },
+  "role": "player",
+  "date": {
+    "$date": "2024-04-09T12:15:40.303Z"
+  },
+  "firstname": "ole",
+  "lastname": "ole",
+  "email": "ole@pio.it",
+  "password": "$2b$10$ico3f56uYoN09khSWkrlOOm5Nr0mreII3qL0IuysnN4ftP.jExWC6",
+  "__v": 0,
+  "blocked": false
+},
+{
+  "_id": {
+    "$oid": "66153e1013b372a009f3637e"
+  },
+  "role": "player",
+  "playerId": {
+    "$oid": "6615430413b372a009f363d5"
+  },
+  "date": {
+    "$date": "2024-04-09T13:09:36.338Z"
+  },
+  "firstname": "jk",
+  "lastname": "loriee",
+  "email": "jol@jol.it",
+  "password": "$2b$10$q10QIxIGoLpXOYEPp6kW.O4eoYWbmjCf3x83/yuWa9LszQ5AzxfHO",
+  "__v": 0,
+  "blocked": false
+},
+{
+  "_id": {
+    "$oid": "66164d069384c53e314f6d40"
+  },
+  "role": "player",
+  "playerId": null,
+  "date": {
+    "$date": "2024-04-10T08:25:42.110Z"
+  },
+  "firstname": "tinasi",
+  "lastname": "tinas",
+  "email": "tinas@tinas.it",
+  "password": "$2b$10$05Nvnpu/AD8.J9bgGstO1Ofqf04WYNQClGFvI1F4QrWH8Ph5dghMC",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6617982d729aa7d4afedd4bd"
+  },
+  "role": "player",
+  "playerId": {
+    "$oid": "6617cb425cfd9f7506aec19d"
+  },
+  "date": {
+    "$date": "2024-04-11T07:58:37.339Z"
+  },
+  "firstname": "tommmy",
+  "lastname": "liam",
+  "email": "liam@test.com",
+  "password": "$2b$10$q1CJv7iMMuPg06MlJuqV.uxTYL.OjGnXXinVDCi6CTcI/nC7mlBfi",
+  "__v": 0,
+  "blocked": false
+},
+{
+  "_id": {
+    "$oid": "6617ecf95cfd9f7506aec251"
+  },
+  "role": "player",
+  "playerId": null,
+  "blocked": true,
+  "date": {
+    "$date": "2024-04-11T14:00:25.523Z"
+  },
+  "firstname": "test",
+  "lastname": "test",
+  "email": "tess@email.com",
+  "password": "$2b$10$JBsTLtwpIHTh4c6V.mDOlOHtCU7phV6LwXig4ovqyYh.mi0ql9Ef6",
+  "__v": 0
+}]
