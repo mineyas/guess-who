@@ -1,52 +1,42 @@
-// import "./App.css";
-import {
-  BrowserRouter as Router,
-  Route,
-  Routes,
-  Navigate,
-  useNavigate,
-  redirect,
-} from "react-router-dom";
-import NotFoundPage from "./pages/NotFoundPage";
+import { Navigate, Route, Routes, useNavigate } from "react-router-dom";
+import { logoutGet } from "./api/routes";
+import Characters from "./components/Admin/Characters";
+import Users from "./components/Admin/Users";
+import Navbar from "./components/Navbar";
+import Info from "./components/Profile/Info";
+import AdminPage from "./pages/AdminPage";
+import GamePage from "./pages/GamePage";
 import HomePage from "./pages/HomePage";
 import LoginPage from "./pages/LoginPage";
+import NotFoundPage from "./pages/NotFoundPage";
 import SignupPage from "./pages/SignupPage";
-import AdminPage from "./pages/AdminPage";
-import Navbar from "./components/Navbar";
-import { logoutGet } from "./api/axios";
-import Users from "./components/Admin/Users";
-import Characters from "./components/Admin/Characters";
-import GamePage from "./pages/GamePage";
-import Info from "./components/Profile/Info";
-// import './assets/global.css'
+import ProtectedRoute from "./ReusableComponents/ProtectedRoute";
+
+// const ProtectedRoute = ({ isAuthenticated, children }) => {
+//   if (!isAuthenticated) {
+//     return <Navigate to="/login" replace />;
+//   }
+//   return children;
+// };
 
 function App() {
   const navigate = useNavigate();
-  const name = localStorage.getItem("firstname");
-  const role = localStorage.getItem("role");
-  const email = localStorage.getItem("email");
+  const name = sessionStorage.getItem("firstname");
+  const role = sessionStorage.getItem("role");
+  const email = sessionStorage.getItem("email");
 
   const isAdmin = () => role === "admin";
-
-  const isLoggedIn = () => {
-    if (email) {
-      return true;
-    }
-  };
+  const isLoggedIn = () => !!email;
   const handleLogout = () => {
     try {
       logoutGet();
-      localStorage.removeItem("token");
-      localStorage.removeItem("email");
-      localStorage.removeItem("role");
-      localStorage.removeItem("firstname");
-      // setMessage("Logout successful");
-      // setMessageType("success");
+      sessionStorage.removeItem("token");
+      sessionStorage.removeItem("email");
+      sessionStorage.removeItem("role");
+      sessionStorage.removeItem("firstname");
       navigate("/login");
     } catch (error) {
       console.error("Error logging out:", error);
-      // setMessage("Error logging out");
-      // setMessageType("error");
     }
   };
   return (
@@ -60,40 +50,53 @@ function App() {
         <Route path="/signup" element={<SignupPage />} />
 
         <Route
-          exact
           path="/"
-          element={isLoggedIn() ? <HomePage /> : <Navigate to="/login" />}
+          element={
+            <ProtectedRoute isAuthenticated={isLoggedIn()}>
+              <HomePage />
+            </ProtectedRoute>
+          }
         />
         <Route
           path="/profile"
-          element={isLoggedIn() ? <Info /> : <Navigate to="/login" />}
+          element={
+            <ProtectedRoute isAuthenticated={isLoggedIn()}>
+              <Info />
+            </ProtectedRoute>
+          }
         />
         <Route
           path="/game"
-          element={isLoggedIn() ? <GamePage /> : <Navigate to="/login" />}
+          element={
+            <ProtectedRoute isAuthenticated={isLoggedIn()}>
+              <GamePage />
+            </ProtectedRoute>
+          }
         />
         <Route
           path="/admin"
-          element={isAdmin() ? <AdminPage /> : <Navigate to="/login" />}
+          element={
+            <ProtectedRoute isAuthenticated={isAdmin()}>
+              <AdminPage />
+            </ProtectedRoute>
+          }
         />
         <Route
           path="/admin/users"
-          element={isAdmin() ? <Users /> : <Navigate to="/login" />}
+          element={
+            <ProtectedRoute isAuthenticated={isAdmin()}>
+              <Users />
+            </ProtectedRoute>
+          }
         />
         <Route
           path="/admin/characters"
-          element={isAdmin() ? <Characters /> : <Navigate to="/login" />}
+          element={
+            <ProtectedRoute isAuthenticated={isAdmin()}>
+              <Characters />
+            </ProtectedRoute>
+          }
         />
-
-        {/* <Route
-          path="/admin/users"
-          element={isAdmin() ? <AdminUsers /> : <Navigate to="/login" />}
-        />
-        <Route
-          path="/admin/characters"
-          element={isAdmin() ? <AdminCharacters /> : <Navigate to="/login" />}
-        /> */}
-
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
       {/* </div> */}
