@@ -19,7 +19,7 @@ export default function Navbar({ username, onLogout, role }) {
 
   useEffect(() => {
     getUserInfo();
-  }, []);
+  });
   return (
     <nav className="flex justify-between items-center bg-accent2 p-4">
       <span className="w-fit bg-white rounded-full">

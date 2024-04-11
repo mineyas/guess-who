@@ -1,4 +1,4 @@
-import { Navigate, Route, Routes, useNavigate } from "react-router-dom";
+import { Route, Routes, useNavigate } from "react-router-dom";
 import { logoutGet } from "./api/routes";
 import Characters from "./components/Admin/Characters";
 import Users from "./components/Admin/Users";
@@ -11,13 +11,6 @@ import LoginPage from "./pages/LoginPage";
 import NotFoundPage from "./pages/NotFoundPage";
 import SignupPage from "./pages/SignupPage";
 import ProtectedRoute from "./ReusableComponents/ProtectedRoute";
-
-// const ProtectedRoute = ({ isAuthenticated, children }) => {
-//   if (!isAuthenticated) {
-//     return <Navigate to="/login" replace />;
-//   }
-//   return children;
-// };
 
 function App() {
   const navigate = useNavigate();
@@ -44,7 +37,6 @@ function App() {
       {isLoggedIn() && (
         <Navbar username={name} role={role} onLogout={handleLogout} />
       )}
-      {/* <div> */}
       <Routes>
         <Route path="/login" element={<LoginPage />} />
         <Route path="/signup" element={<SignupPage />} />
@@ -99,7 +91,6 @@ function App() {
         />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
-      {/* </div> */}
     </>
   );
 }

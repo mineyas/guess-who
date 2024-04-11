@@ -1,5 +1,5 @@
 import { Icon } from "@iconify/react";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import MessageBanner from "../MessageBanner";
 import { updateCharacter } from "../../api/routes";
@@ -15,8 +15,6 @@ export default function ModalViewEdit({
   const {
     register,
     handleSubmit,
-    reset,
-    setValue,
     formState: { errors },
   } = useForm({
     defaultValues: {
@@ -40,6 +38,7 @@ export default function ModalViewEdit({
   const handleChange = (e) => {
     console.log(e.target.files[0], "rrrr file");
     const file = e.target.files[0];
+    setFileName(file.name);
 
     setFileUpdate(URL.createObjectURL(file));
   };
@@ -63,7 +62,6 @@ export default function ModalViewEdit({
       setTimeout(() => {
         setMessage("");
       }, 4000);
-
     } catch (error) {
       setMessage("Error adding character");
       setMessageType("error");

@@ -8,10 +8,8 @@ export default function ModalAdd({ isOpen, setIsOpen, reloadCharacters }) {
   const {
     register,
     handleSubmit,
-    watch,
     setValue,
     reset,
-    resetField,
     formState: { errors },
   } = useForm();
 
@@ -26,7 +24,6 @@ export default function ModalAdd({ isOpen, setIsOpen, reloadCharacters }) {
   });
   const [message, setMessage] = useState("");
   const [messageType, setMessageType] = useState("");
-  const [selectedImage, setSelectedImage] = useState(null);
   const [file, setFile] = useState();
 
   const genderTypes = ["male", "female"];
@@ -34,10 +31,6 @@ export default function ModalAdd({ isOpen, setIsOpen, reloadCharacters }) {
   const hairColors = ["Black", "Brown", "Blonde", "Red", "Gray", "Other"];
   const yesOrno = ["yes", "no"];
 
-  // const handleFileChange = (event) => {
-  //   const file = event.target.files[0];
-  //   setSelectedFile(file);
-  // };
   function handleChange(e) {
     console.log(e.target.files[0].name, "rrrr file");
     setFile(URL.createObjectURL(e.target.files[0]));
@@ -324,15 +317,17 @@ export default function ModalAdd({ isOpen, setIsOpen, reloadCharacters }) {
               {errors.hat && (
                 <span className="text-red-600">This field is required</span>
               )}
-            
-            <div className="form-group">
+
+              <div className="form-group">
                 <label className="title">Accessories</label>
                 <div className="radio-container">
                   {yesOrno.map((e) => (
                     <label
                       key={e}
                       className={`radio-label ${
-                        selectedOptions.accessories === e ? "bg-primary text-white" : ""
+                        selectedOptions.accessories === e
+                          ? "bg-primary text-white"
+                          : ""
                       }`}
                       onClick={() => handleOptionChange("accessories", e)}
                     >

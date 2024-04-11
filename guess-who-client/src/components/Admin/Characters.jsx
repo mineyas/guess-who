@@ -6,18 +6,11 @@ import ModalAdd from "./ModalAdd";
 import ModalViewEdit from "./ModalViewEdit";
 export default function Characters() {
   const [characters, setCharacters] = useState([]);
-  // const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedCharacter, setSelectedCharacter] = useState(null);
   const [isModalAddOpen, setIsModalAddOpen] = useState(false);
   const [isModalViewEditOpen, setIsModalViewEditOpen] = useState(false);
 
-  const {
-    reload,
-    register,
-    handleSubmit,
-    reset,
-    formState: { errors },
-  } = useForm();
+  const { reset } = useForm();
   const getCharacters = () => {
     try {
       loadAllCharacters().then((response) => {
@@ -45,7 +38,6 @@ export default function Characters() {
     setSelectedCharacter(e);
     setIsModalViewEditOpen(true);
     reset();
-    // test test
   };
   const openCreateCharactereModal = (e) => {
     setSelectedCharacter(e);
@@ -125,7 +117,6 @@ export default function Characters() {
         </div>
       </div>
 
-      {/* {isModalOpen && <ModalAdd onClose={handleModalClose} reloadCharacters={reloadCharacters} />} */}
       <ModalAdd
         reloadCharacters={reloadCharacters}
         isOpen={isModalAddOpen}

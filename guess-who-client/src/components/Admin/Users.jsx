@@ -1,4 +1,3 @@
-import { Icon } from "@iconify/react";
 import { useEffect, useState } from "react";
 import { blockUser, loadAllUsers } from "../../api/routes";
 import MessageBanner from "../MessageBanner";
@@ -19,9 +18,6 @@ export default function Users() {
     }
   };
 
-  const handleDelete = (id) => {
-    console.log(id);
-  };
   const handleBlock = async (user) => {
     console.log(user);
     try {

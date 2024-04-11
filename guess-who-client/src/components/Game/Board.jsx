@@ -16,13 +16,13 @@ export default function Board() {
     }
   };
 
-  console.log(characters, "characters");
-  useEffect(() => {
-    loadCharacters();
-  }, []);
   const handleDelete = () => {
     setIsDeleted(true);
   };
+  
+  useEffect(() => {
+    loadCharacters();
+  }, []);
 
   const remainingPlaceholderCount = 24 - characters.length;
   const placeholderArticles = Array.from({
@@ -32,7 +32,7 @@ export default function Board() {
       <span className="w-fit bg-white rounded-full">
         <img src={logo} alt="logo guess who" />
       </span>
-      <p className="text-center card-name">{`Qui ${index + 1}`}</p>
+      <p className="text-center card-name md:text-sm">{`Qui ${index + 1}`}</p>
     </article>
   ));
 
