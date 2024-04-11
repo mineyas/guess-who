@@ -1,5 +1,10 @@
 import { Icon } from "@iconify/react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
+import MessageBanner from "../MessageBanner";
+import { updateCharacter } from "../../api/routes";
+import CharacterFormField from "../../ReusableComponents/CharacterFormField";
+import FormButtons from "../../ReusableComponents/FormButtons";
 
 export default function ModalViewEdit({
   character,
@@ -7,7 +12,64 @@ export default function ModalViewEdit({
   isOpen,
   setIsOpen,
 }) {
+  const {
+    register,
+    handleSubmit,
+    reset,
+    setValue,
+    formState: { errors },
+  } = useForm({
+    defaultValues: {
+      name: character?.name,
+      gender: character?.gender,
+      hairColor: character?.hairColor,
+      eyeColor: character?.eyeColor,
+      facialHair: character?.facialHair,
+      glasses: character?.glasses,
+      hat: character?.hat,
+      image: character?.image || "",
+    },
+  });
+
   const [isEdit, setIsEdit] = useState(false);
+  const [message, setMessage] = useState("");
+  const [messageType, setMessageType] = useState("");
+  const [fileUpdate, setFileUpdate] = useState();
+  const [fileName, setFileName] = useState("");
+
+  const handleChange = (e) => {
+    console.log(e.target.files[0], "rrrr file");
+    const file = e.target.files[0];
+
+    setFileUpdate(URL.createObjectURL(file));
+  };
+  const onSubmit = async (data) => {
+    console.log(data, "form data add character");
+    try {
+      const formData = new FormData();
+      formData.append("name", data.name);
+      formData.append("gender", data.gender);
+      formData.append("hairColor", data.hairColor);
+      formData.append("eyeColor", data.eyeColor);
+      formData.append("facialHair", data.facialHair);
+      formData.append("glasses", data.glasses);
+      formData.append("hat", data.hat);
+      formData.append("image", data.image[0]);
+
+      const response = await updateCharacter(character._id, formData);
+      console.log("Response:", response);
+      setMessage("Character added successfully");
+      setMessageType("success");
+      setTimeout(() => {
+        setMessage("");
+      }, 4000);
+
+    } catch (error) {
+      setMessage("Error adding character");
+      setMessageType("error");
+      console.error("Error adding character:", error.message);
+    }
+  };
   const closeModal = () => {
     setIsOpen(false);
     setIsEdit(false);
@@ -15,12 +77,12 @@ export default function ModalViewEdit({
     // reset()
     console.log("close close");
   };
-  if (!character) {
-    return null;
-  }
+  const openEdit = () => {
+    setIsEdit(true);
+  };
   return (
     <div className={`modal-container ${isOpen ? "visible" : "hidden"}`}>
-      <div className="container flex_col justify-between max-w-5xl h-[80vh] ">
+      <div className="container flex_col justify-between gap-8 max-w-5xl">
         <span className="flex justify-between items-center">
           <h1 className="mb-0">Character Details</h1>
           <Icon
@@ -30,119 +92,110 @@ export default function ModalViewEdit({
             onClick={closeModal}
           />
         </span>
-        <div className="flex_row items-center gap-4">
-          <div className="w-1/5 border border-black">
-            <span className="relative">
-              <img
-                src={`http://localhost:3000/uploads/${character.image}`}
-                //   src={character.image}
-                alt={character.name}
-                className="w-full"
-              />
-              <Icon
-                icon={"majesticons:edit-pen-2"}
-                width={35}
-                className="cursor-pointer absolute -bottom-2 right-[40%] text-white bg-accent4 rounded-full p-2"
-              />
-              {/* <button>Edit</button> */}
-            </span>
-          </div>
-          <div className="flex_col gap-3 w-4/5 border border-primary">
-            <span className="flex_row items-center gap-2">
-              <label htmlFor="" className="text-primary text-lg w-1/5">
-                Name
-              </label>
-              <input
+        <form onSubmit={handleSubmit(onSubmit)} encType="multipart/form-data">
+          <div className="flex_row items-center justify-evenly gap-4">
+            <div className="w-2/5 ">
+              <span className="flex_col gap-3 items-center justify-center">
+                <img
+                  alt={character?.name}
+                  src={
+                    fileUpdate
+                      ? fileUpdate
+                      : `${process.env.REACT_APP_BASE_URL}/uploads/${character?.image}`
+                  }
+                  className="w-full"
+                />
+                {isEdit && (
+                  <>
+                    <input
+                      type="file"
+                      id="image"
+                      {...register("image")}
+                      onChange={handleChange}
+                      accept="image/*"
+                      className="w-36"
+                    />
+                    {fileName && <p>{fileName}</p>}
+                  </>
+                )}
+              </span>
+            </div>
+            <div className="flex_col gap-3 w-3/5 ">
+              <CharacterFormField
+                isEdit={isEdit}
+                label="Name"
                 type="text"
-                value={character.name}
-                className="rounded-md border-gray-300 text-gray-400"
+                value={character?.name}
+                register={register("name")}
+                errors={errors.name}
+                required
               />
-              {/* <p>{character.name}</p> */}
-            </span>
-            <span className="flex_row items-center gap-2">
-              <label htmlFor="" className="text-primary text-lg w-1/5">
-                Gender
-              </label>
-              <input
+              <CharacterFormField
+                isEdit={isEdit}
+                label="Gender"
                 type="text"
-                value={character.gender}
-                className="rounded-md border-gray-300 text-gray-400"
+                value={character?.gender}
+                register={register("gender")}
+                errors={errors.gender}
+                required
               />
-              {/* <p>{character.gender}</p> */}
-            </span>
-            <span className="flex_row items-center gap-2">
-              <label htmlFor="" className="text-primary text-lg w-1/5">
-                Hair Color
-              </label>
-              <input
+              <CharacterFormField
+                isEdit={isEdit}
+                label="Hair Color"
                 type="text"
-                value={character.hairColor}
-                className="rounded-md border-gray-300 text-gray-400"
+                value={character?.hairColor}
+                register={register("hairColor")}
+                errors={errors.hairColor}
+                required
               />
-            {/* <p>{character.hairColor}</p> */}
+              <CharacterFormField
+                isEdit={isEdit}
+                label="Eye Color"
+                type="text"
+                value={character?.eyeColor}
+                register={register("eyeColor")}
+                errors={errors.eyeColor}
+                required
+              />
+              <CharacterFormField
+                isEdit={isEdit}
+                label="Facial Hair"
+                type="text"
+                value={character?.facialHair}
+                register={register("facialHair")}
+                errors={errors.facialHair}
+                required
+              />
 
-            </span>
-            <span className="flex_row items-center gap-2">
-              <label htmlFor="" className="text-primary text-lg w-1/5">
-                Eye Color
-              </label>
-              <input
+              <CharacterFormField
+                isEdit={isEdit}
+                label="Glasses"
                 type="text"
-                value={character.eyeColor}
-                className="rounded-md border-gray-300 text-gray-400"
+                value={character?.glasses}
+                register={register("glasses")}
+                errors={errors.glasses}
+                required
               />
-              {/* <p>{character.eyeColor}</p> */}
-            </span>
-            <span className="flex_row items-center gap-2">
-              <label htmlFor="" className="text-primary text-lg w-1/5">
-                Facial Hair
-              </label>
-              <input
+              <CharacterFormField
+                isEdit={isEdit}
+                label="Hat"
                 type="text"
-                value={character.facialHair}
-                className="rounded-md border-gray-300 text-gray-400"
+                value={character?.hat}
+                register={register("hat")}
+                errors={errors.hat}
+                required
               />
-              {/* <p>{character.facialHair}</p> */}
-            </span>
-            <span className="flex_row items-center gap-2">
-              <label htmlFor="" className="text-primary text-lg w-1/5">
-                Glasses
-              </label>
-              <input
-                type="text"
-                value={character.glasses}
-                className="rounded-md border-gray-300 text-gray-400"
-              />
-              {/* <p>{character.glasses}</p> */}
-            </span>
-            <span className="flex_row items-center gap-2">
-              <label htmlFor="" className="text-primary text-lg w-1/5">
-                Hat
-              </label>
-              <input
-                type="text"
-                value={character.hat}
-                className="rounded-md border-gray-300 text-gray-400"
-              />
-              {/* <p>{character.hat}</p> */}
-            </span>
+            </div>
           </div>
-        </div>
-        <div className="flex_row justify-end gap-2">
-          <button className="bg-green-400 hover:bg-green-100 text-white hover:text-green-400 font-semibold py-2 px-4 rounded">
-            Save
-          </button>
-          <button className="bg-accent2-dark hover:bg-accent2-light text-white hover:text-accent2-dark font-semibold py-2 px-4 rounded">
-            Edit
-          </button>
-          <button
-            className="bg-red-500 hover:bg-red-200 text-white hover:text-red-500 font-semibold py-2 px-4 rounded"
-            onClick={closeModal}
-          >
-            Close
-          </button>
-        </div>
+          <FormButtons
+            isEdit={isEdit}
+            closeModal={closeModal}
+            openEdit={openEdit}
+            typeSubmit="submit"
+          />
+        </form>
       </div>
+      {message && <MessageBanner type={messageType} message={message} />}
     </div>
   );
 }

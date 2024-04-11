@@ -1,7 +1,7 @@
-import { useRef, useState } from "react";
-import { useForm } from "react-hook-form";
-import { addCharacter } from "../../api/axios";
 import { Icon } from "@iconify/react";
+import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { addCharacter } from "../../api/routes";
 import MessageBanner from "../MessageBanner";
 
 export default function ModalAdd({ isOpen, setIsOpen, reloadCharacters }) {
@@ -22,6 +22,7 @@ export default function ModalAdd({ isOpen, setIsOpen, reloadCharacters }) {
     facialHair: "",
     glasses: "",
     hat: "",
+    accessories: "",
   });
   const [message, setMessage] = useState("");
   const [messageType, setMessageType] = useState("");
@@ -44,6 +45,7 @@ export default function ModalAdd({ isOpen, setIsOpen, reloadCharacters }) {
 
   const onSubmit = async (data) => {
     console.log(data, "form data add character");
+
     try {
       const formData = new FormData();
       formData.append("name", data.name);
@@ -53,6 +55,7 @@ export default function ModalAdd({ isOpen, setIsOpen, reloadCharacters }) {
       formData.append("facialHair", data.facialHair);
       formData.append("glasses", data.glasses);
       formData.append("hat", data.hat);
+      formData.append("accessories", data.accessories);
       formData.append("image", data.image[0]);
 
       const response = await addCharacter(formData);
@@ -74,14 +77,6 @@ export default function ModalAdd({ isOpen, setIsOpen, reloadCharacters }) {
     setSelectedOptions({ ...selectedOptions, [type]: value });
     setValue(type, value);
   };
-  // const closeModal = () => {
-  //   setIsOpen(false);
-  //   reloadCharacters();
-  //   reset();
-  //   console.log("close close", defaultValues);
-  //   // reloadCharacters();
-  //   console.log("close add");
-  // };
 
   const closeModal = () => {
     setIsOpen(false);
@@ -113,10 +108,10 @@ export default function ModalAdd({ isOpen, setIsOpen, reloadCharacters }) {
           onSubmit={handleSubmit(onSubmit)}
           onReset={closeModal}
           encType="multipart/form-data"
-          className="flex_row items-center"
+          className="flex_row gap-8 items-center"
         >
-          <div className="w-1/4 border border-red-500">
-            <div className="flex_col items-center">
+          <div className="w-1/4 ">
+            <div className="flex_col gap-4 items-center">
               {file ? (
                 <img
                   src={file}
@@ -134,20 +129,13 @@ export default function ModalAdd({ isOpen, setIsOpen, reloadCharacters }) {
                 htmlFor="image"
                 className="cursor-pointer w-full text-center"
               >
-                Upload Image
-                {/* <Icon
-                    icon={"solar:upload-linear"}
-                    width={30}
-                    className="cursor-pointer bg-accent2-dark text-white hover:bg-accent2-light hover:text-accent2-dark rounded-md p-2 w-24 h-10"
-                  /> */}
-                {/* <p>{file}</p> */}
                 <input
                   type="file"
                   id="image"
                   accept="image/*"
                   {...register("image", { required: true })}
                   onChange={handleChange}
-                  className="w-full"
+                  className="w-36"
                 />
               </label>
             </div>
@@ -155,8 +143,8 @@ export default function ModalAdd({ isOpen, setIsOpen, reloadCharacters }) {
               <span className="text-red-600">This field is required</span>
             )}
           </div>
-          <div className="w-3/4 border border-green-500">
-            <span>
+          <div className="w-3/4 ">
+            <div>
               <div className="form-group">
                 <label className="title" htmlFor="name">
                   Name
@@ -197,8 +185,8 @@ export default function ModalAdd({ isOpen, setIsOpen, reloadCharacters }) {
                 </div>
               </div>
               {errors.gender && (
-              <span className="text-red-600">This field is required</span>
-            )}
+                <span className="text-red-600">This field is required</span>
+              )}
               <div className="form-group">
                 <label htmlFor="hairColor" className="title">
                   Hair Color
@@ -226,8 +214,8 @@ export default function ModalAdd({ isOpen, setIsOpen, reloadCharacters }) {
                 </div>
               </div>
               {errors.hairColor && (
-              <span className="text-red-600">This field is required</span>
-            )}
+                <span className="text-red-600">This field is required</span>
+              )}
               <div className="form-group">
                 <label htmlFor="eyeColor" className="title">
                   Eye Color
@@ -255,8 +243,8 @@ export default function ModalAdd({ isOpen, setIsOpen, reloadCharacters }) {
                 </div>
               </div>
               {errors.eyeColor && (
-              <span className="text-red-600">This field is required</span>
-            )}
+                <span className="text-red-600">This field is required</span>
+              )}
               <div className="form-group">
                 <label className="title">Facial Hair</label>
                 <div className="radio-container">
@@ -282,8 +270,8 @@ export default function ModalAdd({ isOpen, setIsOpen, reloadCharacters }) {
                 </div>
               </div>
               {errors.facialHair && (
-              <span className="text-red-600">This field is required</span>
-            )}
+                <span className="text-red-600">This field is required</span>
+              )}
               <div className="form-group">
                 <label className="title">Glasses</label>
                 <div className="radio-container">
@@ -309,8 +297,8 @@ export default function ModalAdd({ isOpen, setIsOpen, reloadCharacters }) {
                 </div>
               </div>
               {errors.glasses && (
-              <span className="text-red-600">This field is required</span>
-            )}
+                <span className="text-red-600">This field is required</span>
+              )}
               <div className="form-group">
                 <label className="title">Hat</label>
                 <div className="radio-container">
@@ -334,10 +322,35 @@ export default function ModalAdd({ isOpen, setIsOpen, reloadCharacters }) {
                 </div>
               </div>
               {errors.hat && (
-              <span className="text-red-600">This field is required</span>
-            )}
-            </span>
-
+                <span className="text-red-600">This field is required</span>
+              )}
+            
+            <div className="form-group">
+                <label className="title">Accessories</label>
+                <div className="radio-container">
+                  {yesOrno.map((e) => (
+                    <label
+                      key={e}
+                      className={`radio-label ${
+                        selectedOptions.accessories === e ? "bg-primary text-white" : ""
+                      }`}
+                      onClick={() => handleOptionChange("accessories", e)}
+                    >
+                      <input
+                        type="radio"
+                        name="accessories"
+                        value={e}
+                        {...register("accessories", { required: true })}
+                      />
+                      {e}
+                    </label>
+                  ))}
+                </div>
+              </div>
+              {errors.accessories && (
+                <span className="text-red-600">This field is required</span>
+              )}
+            </div>
             <span className="button-container">
               <button
                 type="submit"
