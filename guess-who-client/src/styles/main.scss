@@ -1,11 +1,4 @@
-@import './variables';
-@import './mixins';
-@import './base';
-@import './layout';
-@import './components';
-
-
-
-// .test {
-//    background-color: aqua;
-// }
+@import 'abstracts/_abstracts-dir';
+@import 'base/_base-dir';
+@import 'components/_components-dir';
+@import 'layouts/_layouts-dir';

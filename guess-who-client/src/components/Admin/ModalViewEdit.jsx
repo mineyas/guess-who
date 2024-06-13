@@ -35,6 +35,9 @@ export default function ModalViewEdit({
   const [fileUpdate, setFileUpdate] = useState();
   const [fileName, setFileName] = useState("");
 
+  const port = process.env.REACT_APP_BASE_URL
+  const image = `${port}/uploads/`
+
   const handleChange = (e) => {
     console.log(e.target.files[0], "rrrr file");
     const file = e.target.files[0];
@@ -99,7 +102,7 @@ export default function ModalViewEdit({
                   src={
                     fileUpdate
                       ? fileUpdate
-                      : `${process.env.REACT_APP_BASE_URL}/uploads/${character?.image}`
+                      : `${image}${character?.image}}`
                   }
                   className="w-full"
                 />

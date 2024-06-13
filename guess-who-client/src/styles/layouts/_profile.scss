@@ -1,0 +1,5 @@
+@import "../abstracts/_abstracts-dir";
+
+  .profile-page {
+    @include section-styles(flex, column, center, center, $color-primary-dark);
+  }

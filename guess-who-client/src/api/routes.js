@@ -17,6 +17,10 @@ export const loadAllUsers = async () => fetchData("/admin/users", "get");
 export const loadAllCharacters = async () =>
   fetchData("/admin/characters", "get");
 
+export const loadAllCharactersPlayer = async () =>
+  fetchData("/characters", "get");
+
+
 export const getUser = async (id) => fetchData("/user/" + id, "get");
 export const getPlayer = async (id) => fetchData("/player/" + id, "get");
 export const getPlayerByUserId = async (userId) =>

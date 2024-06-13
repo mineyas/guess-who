@@ -1,8 +1,8 @@
-import { Route, Routes, useNavigate } from "react-router-dom";
+import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
 import { logoutGet } from "./api/routes";
 import Characters from "./components/Admin/Characters";
 import Users from "./components/Admin/Users";
-import Navbar from "./components/Navbar";
+import Navbar from "./components/Navbar/Navbar";
 import Info from "./components/Profile/Info";
 import AdminPage from "./pages/AdminPage";
 import GamePage from "./pages/GamePage";
@@ -11,9 +11,12 @@ import LoginPage from "./pages/LoginPage";
 import NotFoundPage from "./pages/NotFoundPage";
 import SignupPage from "./pages/SignupPage";
 import ProtectedRoute from "./ReusableComponents/ProtectedRoute";
+import Footer from "./components/Footer/Footer";
+import MemoryGamePage from "./pages/MemoryGamePage";
 
 function App() {
   const navigate = useNavigate();
+  const location = useLocation();
   const name = sessionStorage.getItem("firstname");
   const role = sessionStorage.getItem("role");
   const email = sessionStorage.getItem("email");
@@ -32,6 +35,10 @@ function App() {
       console.error("Error logging out:", error);
     }
   };
+
+  // const noFooterPaths = ["/login", "/signup"];
+  // const showFooter = !noFooterPaths.includes(location.pathname);
+
   return (
     <>
       {isLoggedIn() && (
@@ -65,6 +72,15 @@ function App() {
             </ProtectedRoute>
           }
         />
+
+        <Route
+          path="/memo_game"
+          element={
+            <ProtectedRoute isAuthenticated={isLoggedIn()}>
+              <MemoryGamePage />
+            </ProtectedRoute>
+          }
+        />
         <Route
           path="/admin"
           element={
@@ -91,6 +107,9 @@ function App() {
         />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
+
+      {/* {showFooter && <Footer />} */}
+      <Footer />
     </>
   );
 }

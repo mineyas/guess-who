@@ -58,8 +58,8 @@ export default function AdminPage() {
     getAllCharacters();
   }, []);
   return (
-    <section className="section h-[90vh] p-8">
-      <div className="flex_row justify-between items-center w-full">
+    <section className="section">
+      <div className="container_title">
         <h1 className="w-full">Admin</h1>
         <span
           onClick={goToProfile}
@@ -68,7 +68,7 @@ export default function AdminPage() {
           <Icon icon={"iconamoon:profile"} width={50} />
         </span>
       </div>
-      <div className="w-full h-full  flex flex-wrap justify-center gap-y-8 gap-x-12">
+      <div className="container_cards gap-y-8 gap-x-12">
         <div onClick={goToUsersPage} className="admin-card bg-primary">
           <span className="admin-card-info">
             <Icon icon={"ph:users-thin"} width={100} />
@@ -117,6 +117,7 @@ export default function AdminPage() {
               {" "}
               {characters.length > 0 ? characters.length : 0}{" "}
             </h2>
+            {/* <h1 className="testt">rrr</h1> */}
           </span>
         </div>
       </div>

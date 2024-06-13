@@ -20,11 +20,20 @@ export default function Users() {
 
   const handleBlock = async (user) => {
     console.log(user);
+
+    const isUserBlocked = user.blocked;
     try {
       const response = await blockUser(user._id, { isBlocked: !user.blocked });
       console.log(response, "block user response");
-      setMessage("User blocked successfully");
-      setMessageType("success");
+
+      if (!isUserBlocked) {
+        setMessage("User blocked successfully");
+        setMessageType("warning");
+      } else {
+        setMessage("User unblocked successfully");
+        setMessageType("success");
+      }
+
       setTimeout(() => {
         setMessage("");
       }, 2000);
@@ -39,8 +48,10 @@ export default function Users() {
     getUsers();
   }, []);
   return (
-    <div className="parent-container">
-      <h1>Users</h1>
+    <div className="section">
+      <div className="container_title">
+        <h1>Users</h1>
+      </div>
       <div className="table-container flex flex-col gap-2">
         <table className="users-table ">
           <thead>

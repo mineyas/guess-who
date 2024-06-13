@@ -15,8 +15,10 @@ export default function GamePage() {
     navigate("/");
   };
   return (
-    <section className="parent-container">
-      <h1>Gameee</h1>
+    <section className="section">
+      <div className="container_title">
+        <h1>Gameee</h1>
+      </div>
       <div className="flex_col lg:flex-row gap-4 justify-between">
         <div className="question-bar w-full order-last lg:order-first lg:w-fit">
           <div className="flex_row question-bar-buttons gap-4">
@@ -56,7 +58,6 @@ export default function GamePage() {
         <div className="players-and-preview flex_row order-first lg:order-last gap-4 justify-between items-center lg:items-end">
           <div className="players flex_row gap-4">
             <article className="card">
-              
               <p>name</p>
             </article>
             <article className="card">

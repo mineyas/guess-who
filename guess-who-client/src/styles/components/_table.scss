@@ -1,0 +1,8 @@
+.table-section {
+  @include flex-direc(column);
+  gap: 2rem;
+  .table-container {
+    height: 70vh;
+    overflow: scroll;
+  }
+}

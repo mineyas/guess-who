@@ -48,18 +48,18 @@ export default function Characters() {
     getCharacters();
   }, []);
   return (
-    <div className="parent-container">
-      <h1>Characters</h1>
-      <div className="table-container flex flex-col gap-2">
-        <div className="w-full text-right">
-          <button
-            className="button text-right bg-primary text-white hover:bg-primary-light hover:text-white"
-            onClick={() => openCreateCharactereModal()}
-          >
-            Add Charachter
-          </button>
-        </div>
-        <div className="h-[70vh] overflow-scroll">
+    <div className="section">
+      <div className="container_title">
+        <h1>Characters</h1>
+        <button
+          className="button text-right bg-primary text-white hover:bg-primary-light hover:text-white"
+          onClick={() => openCreateCharactereModal()}
+        >
+          Add Charachter
+        </button>
+      </div>
+      <div className="table-section">
+        <div className="table-container">
           <table className="users-table ">
             <thead>
               <tr>

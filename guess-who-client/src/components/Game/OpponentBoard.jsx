@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
-import { loadAllCharacters } from "../../api/routes";
+import { loadAllCharacters, loadAllCharactersPlayer } from "../../api/routes";
 import logo from "../../assets/img/quii.png";
 export default function OpponentBoard() {
   const [characters, setCharacters] = useState([]);
   const loadCharacters = () => {
     try {
-      loadAllCharacters().then((response) => {
+      loadAllCharactersPlayer().then((response) => {
         console.log(response);
         setCharacters(response.characters);
       });

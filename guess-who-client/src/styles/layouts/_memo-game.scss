@@ -1,0 +1,12 @@
+// .container_game{
+//     background: teal;
+// }
+
+.container_game {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  justify-items: center;
+  align-items: stretch;
+  gap: 1rem;
+}

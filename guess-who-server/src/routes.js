@@ -5,34 +5,73 @@ const User = require("./controllers/User");
 const Player = require("./controllers/Player");
 const Game = require("./controllers/Game");
 const image = require("./middleware/multerMiddleware");
-const { authMiddleware } = require("./middleware/isAdmin");
+const { authMiddleware } = require("./middleware/isLogged");
+const { isAdmin } = require("./middleware/isAdmin");
 module.exports = (app) => {
   app.post("/login", Login.postLogin);
   app.post("/signup", Signup.postSignup);
   app.get("/logout", Login.getLogout);
 
   // ADMIN
-  app.get("/admin", authMiddleware, User.getAdminById);
-  app.get("/admin/users", authMiddleware, User.getAllUsersPlayers);
-  app.post("/admin/users/edit/:id", authMiddleware, User.editUser);
-  app.delete("/admin/users/delete/:id", authMiddleware, User.deleteUser);
-  app.get("/admin/characters", authMiddleware, Character.getAllCharacters);
+  app.get("/admin", authMiddleware,
+  isAdmin,
+  User.getAdminById);
+  app.get(
+    "/admin/users",
+
+    authMiddleware,
+    isAdmin,
+    User.getAllUsersPlayers
+  );
+  app.post(
+    "/admin/users/edit/:id",
+
+    authMiddleware,
+    isAdmin,
+    User.editUser
+  );
+  app.delete(
+    "/admin/users/delete/:id",
+
+    authMiddleware,
+    isAdmin,
+    User.deleteUser
+  );
+  app.get(
+    "/admin/characters",
+
+    authMiddleware,
+    isAdmin,
+    Character.getAllCharacters
+  );
   app.post(
     "/admin/character",
     image.upload.single("image"),
+
     authMiddleware,
+    isAdmin,
     Character.addCharacter
   );
-  app.get("/admin/character/:id", authMiddleware, Character.getOneCharacter);
+  app.get(
+    "/admin/character/:id",
+
+    authMiddleware,
+    isAdmin,
+    Character.getOneCharacter
+  );
   app.post(
     "/admin/character/edit/:id",
     image.upload.single("image"),
+
     authMiddleware,
+    isAdmin,
     Character.editCharacter
   );
   app.delete(
     "/admin/character/delete/:id",
+
     authMiddleware,
+    isAdmin,
     Character.deleteCharacter
   );
 

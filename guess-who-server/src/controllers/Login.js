@@ -4,7 +4,7 @@ const Cookies = require("cookies");
 const User = require("../repositories/User");
 const statusCodes = require("../utils/statusCodes");
 const generateToken = (user) => {
-  return jwt.sign({ userEmail: user.email }, process.env.JWT_SECRET, {
+  return jwt.sign({ userEmail: user.email, userId: user._id, role: user.role }, process.env.JWT_SECRET, {
     expiresIn: "1h",
   });
 };

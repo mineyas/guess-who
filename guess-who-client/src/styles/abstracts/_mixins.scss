@@ -1,0 +1,46 @@
+@mixin button-styles($bg-color, $text-color) {
+  background-color: $bg-color;
+  color: $text-color;
+  border: none;
+  border-radius: 5px;
+  padding: 0.5rem 3rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  font-size: 16px;
+  width: fit-content;
+
+  &:hover {
+    background-color: darken($bg-color, 10%);
+  }
+}
+// section options
+@mixin section-styles($display, $flex-direction, $align-items, $justify-content, $bg-color) {
+  display: $display;
+  flex-direction: $flex-direction;
+  align-items: $align-items;
+  justify-content: $justify-content;
+  background-color: $bg-color;
+}
+// flexx options
+@mixin flex-justify($justify) {
+  display: flex;
+  flex-direction: row;
+  justify-content: $justify;
+  align-items: center;
+}
+@mixin flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+@mixin flex-direc($direction) {
+  display: flex;
+  flex-direction: $direction;
+}
+@mixin justify-content($value) {
+  justify-content: $value;
+}
+
+@mixin align-items($value) {
+  align-items: $value;
+}

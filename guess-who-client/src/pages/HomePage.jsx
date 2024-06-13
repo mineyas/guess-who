@@ -5,7 +5,8 @@ import { useNavigate } from "react-router-dom";
 import {
   addPlayer,
   getUser,
-  logoutGet
+  loadAllCharactersPlayer,
+  logoutGet,
 } from "../api/routes";
 import loadingAnimation from "../assets/animations/load.json";
 import MessageBanner from "../components/MessageBanner";
@@ -28,25 +29,10 @@ export default function HomePage() {
   const [loadingMessage, setLoadingMessage] = useState("");
   const [addUsername, setAddUsername] = useState(false);
   const [user, setUser] = useState({});
+  const [characters, setCharacters] = useState([]);
   const [player, setPlayer] = useState({});
   const [loading, setLoading] = useState(false);
   console.log(user, "user here");
-  const handleLogout = () => {
-    try {
-      logoutGet();
-      sessionStorage.removeItem("token");
-      sessionStorage.removeItem("email");
-      sessionStorage.removeItem("role");
-      sessionStorage.removeItem("firstname");
-      setMessage("Logout successful");
-      setMessageType("success");
-      navigate("/login");
-    } catch (error) {
-      console.error("Error logging out:", error);
-      setMessage("Error logging out");
-      setMessageType("error");
-    }
-  };
 
   const fetchUser = async () => {
     try {
@@ -57,19 +43,43 @@ export default function HomePage() {
       console.error("Error player:", error.message);
     }
   };
-  const checkPlayerId = () => {
-    fetchUser();
+  const loadCharacters = () => {
+    try {
+      loadAllCharactersPlayer().then((response) => {
+        console.log(response);
+        setCharacters(response.characters);
+      });
+    } catch (error) {
+      console.error("Error while fetching characters:", error);
+    }
+  };
+
+  const checkPlayerId =  () => {
+     fetchUser();
+     loadCharacters();
 
     if (!user.playerId) {
       setAddUsername(true);
     } else {
       setLoading(true);
       setTimeout(() => {
-        navigate("/game");
+        if (characters.length < 24) {
+          console.log(characters.length, "characters length");
+          navigate("/memo_game");
+        } else {
+          navigate("/game");
+        }
       }, 3000);
     }
   };
 
+  // const checkCharactersNumber = () => {
+  //   loadAllCharactersPlayer();
+  //   setLoading(true);
+  //   if (characters.length < 24) {
+  //     navigate("/memo_game");
+  //   }
+  // };
   const onSubmit = async (data) => {
     // setLoadingMessage("Adding character...");
     console.log(data, "form data add player");
@@ -87,6 +97,7 @@ export default function HomePage() {
       setTimeout(() => {
         setLoading(true);
         navigate("/game");
+        navigate("/memo_game");
       }, 4000);
     } catch (error) {
       setMessage("Error adding character");
@@ -114,7 +125,7 @@ export default function HomePage() {
   return (
     <>
       {/* <Navbar username={name + " (" + role + ")"} onLogout={handleLogout} /> */}
-      <section className="section h-[90vh] bg-accent4-dark">
+      <section className="section homepage_player">
         <div className="p-8 bg-white rounded-lg shadow">
           <h1 className="text-3xl font-bold mb-6 text-primary-dark">
             Welcome to Guess Who!

@@ -1,13 +1,18 @@
 import { Icon } from "@iconify/react";
 import { useEffect, useState } from "react";
-import { loadAllCharacters } from "../../api/routes";
+import { loadAllCharactersPlayer } from "../../api/routes";
 import logo from "../../assets/img/quii.png";
 export default function Board() {
   const [isDeleted, setIsDeleted] = useState(false);
   const [characters, setCharacters] = useState([]);
+
+  const port = process.env.REACT_APP_BASE_URL;
+  const image = `${port}/uploads/`;
+  console.log(image);
+
   const loadCharacters = () => {
     try {
-      loadAllCharacters().then((response) => {
+      loadAllCharactersPlayer().then((response) => {
         console.log(response);
         setCharacters(response.characters);
       });
@@ -19,11 +24,12 @@ export default function Board() {
   const handleDelete = () => {
     setIsDeleted(true);
   };
-  
+
   useEffect(() => {
     loadCharacters();
   }, []);
 
+  console.log(process.env.REACT_APP_BASE_URL);
   const remainingPlaceholderCount = 24 - characters.length;
   const placeholderArticles = Array.from({
     length: remainingPlaceholderCount,
@@ -39,7 +45,7 @@ export default function Board() {
   return (
     <div className="board grid grid-cols-6 gap-4 w-fit lg:w-1/2">
       {characters.map((character) => (
-        <article className="card-game">
+        <article className="card-game" key={character._id}>
           {isDeleted && (
             <span className="card-deleted">
               <Icon
@@ -48,10 +54,7 @@ export default function Board() {
               ></Icon>
             </span>
           )}
-          <img
-            src={`${process.env.REACT_APP_BASE_URL}/uploads/${character.image}`}
-            alt={character.name}
-          />
+          <img src={`${image}${character.image}`} alt={character.name} />
           <p className="text-center card-name">{character.name}</p>
         </article>
       ))}

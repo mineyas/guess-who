@@ -1,0 +1,5 @@
+@import "../abstracts/_abstracts-dir";
+
+.homepage_player {
+  @include section-styles(flex, column, center, center, $color-accent4-dark);
+}
