@@ -37,22 +37,3 @@ exports.postAnswer = async (req, res) => {
   }
 };
 
-exports.getOneUser = async (req, res) => {
-  try {
-    const user = await User.findById(req.params.id);
-    res.status(statusCodes.statusCodes.OK).json({ user });
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: "Error retrieving user" });
-  }
-};
-
-exports.deleteUser = async (req, res) => {
-  try {
-    const user = await User.findByIdAndDelete(req.params.id);
-    res.status(statusCodes.statusCodes.OK).json({ message: "User deleted", user });
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: "Error deleting user" });
-  }
-};

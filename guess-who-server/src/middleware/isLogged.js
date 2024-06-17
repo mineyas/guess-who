@@ -13,8 +13,6 @@ exports.authMiddleware = (req, res, next) => {
           .json({ message: "Failed to authenticate token." });
       } else {
         req.user = decoded;
-        // console.log(req.user, 'user logged req');
-        // console.log(decoded.id, 'user decoded id');
         next();
       }
     });
