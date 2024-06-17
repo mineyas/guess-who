@@ -42,72 +42,75 @@ function App() {
   return (
     <>
       {isLoggedIn() && (
-        <Navbar username={name} role={role} onLogout={handleLogout} />
+        <header>
+          <Navbar username={name} role={role} onLogout={handleLogout} />
+        </header>
       )}
-      <Routes>
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/signup" element={<SignupPage />} />
+      <main>
+        <Routes>
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/signup" element={<SignupPage />} />
 
-        <Route
-          path="/"
-          element={
-            <ProtectedRoute isAuthenticated={isLoggedIn()}>
-              <HomePage />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/profile"
-          element={
-            <ProtectedRoute isAuthenticated={isLoggedIn()}>
-              <Info />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/game"
-          element={
-            <ProtectedRoute isAuthenticated={isLoggedIn()}>
-              <GamePage />
-            </ProtectedRoute>
-          }
-        />
+          <Route
+            path="/"
+            element={
+              <ProtectedRoute isAuthenticated={isLoggedIn()}>
+                <HomePage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/profile"
+            element={
+              <ProtectedRoute isAuthenticated={isLoggedIn()}>
+                <Info />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/game"
+            element={
+              <ProtectedRoute isAuthenticated={isLoggedIn()}>
+                <GamePage />
+              </ProtectedRoute>
+            }
+          />
 
-        <Route
-          path="/memo_game"
-          element={
-            <ProtectedRoute isAuthenticated={isLoggedIn()}>
-              <MemoryGamePage />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/admin"
-          element={
-            <ProtectedRoute isAuthenticated={isAdmin()}>
-              <AdminPage />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/admin/users"
-          element={
-            <ProtectedRoute isAuthenticated={isAdmin()}>
-              <Users />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/admin/characters"
-          element={
-            <ProtectedRoute isAuthenticated={isAdmin()}>
-              <Characters />
-            </ProtectedRoute>
-          }
-        />
-        <Route path="*" element={<NotFoundPage />} />
-      </Routes>
-
+          <Route
+            path="/memo_game"
+            element={
+              <ProtectedRoute isAuthenticated={isLoggedIn()}>
+                <MemoryGamePage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/admin"
+            element={
+              <ProtectedRoute isAuthenticated={isAdmin()}>
+                <AdminPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/admin/users"
+            element={
+              <ProtectedRoute isAuthenticated={isAdmin()}>
+                <Users />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/admin/characters"
+            element={
+              <ProtectedRoute isAuthenticated={isAdmin()}>
+                <Characters />
+              </ProtectedRoute>
+            }
+          />
+          <Route path="*" element={<NotFoundPage />} />
+        </Routes>
+      </main>
       {/* {showFooter && <Footer />} */}
       <Footer />
     </>

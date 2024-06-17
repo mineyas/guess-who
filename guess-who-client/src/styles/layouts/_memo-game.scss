@@ -1,12 +1,116 @@
-// .container_game{
-//     background: teal;
-// }
+@import "../abstracts/_abstracts-dir";
 
+$card-width: 150px;
+$card-height: 200px;
+$gap: 10px;
+
+
+.stats_container {
+  width: 80%;
+  @include flex-direc(row);
+  @include flex-justify(space-between);
+}
 .container_game {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   grid-template-rows: repeat(3, 1fr);
-  justify-items: center;
-  align-items: stretch;
-  gap: 1rem;
+  gap: $gap;
+  width: 100%;
+  max-width: calc(4 * #{$card-width} + 3 * #{$gap});
+  margin: 0 auto;
+
+
+}
+
+.memory_card {
+  background-color: $color-primary-dark;
+  // width: 200px;
+  // height: 200px;
+  padding: 1rem;
+  // border: 1px solid #ccc;
+  border-radius: 8px;
+  overflow: hidden;
+  transition: transform 0.3s;
+  cursor: pointer;
+
+  &:hover {
+    transform: scale(1.05);
+  }
+
+  .memory_img {
+    width: 100%;
+    height: 100%;
+    display: block;
+
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+  }
+
+  .back_card {
+    background-color: #fff;
+    border-radius: 50%;
+  }
+
+  .front_card {}
+}
+
+.container_button {
+  margin-top: 20px;
+  gap: 10px;
+  @include flex-justify(space-evenly);
+
+  button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: $color-primary;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s;
+
+    &:hover {
+      background-color: $color-primary-dark;
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .memo_title {
+    @include flex-direc(column);
+
+    .stats_container {
+      width: 100%;
+      @include flex-direc(row);
+    }
+  }
+
+  .container_game {
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(4, 1fr);
+    max-width: calc(3 * #{$card-width} + 2 * #{$gap});
+  }
+
+  .memory_card {
+    // width: 100px;
+    // height: 150px;
+  }
+
+  .container_button {
+    flex-direction: column;
+    align-items: center;
+
+    button {
+      width: 100%;
+      margin-bottom: 10px;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
 }

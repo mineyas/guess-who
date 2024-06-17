@@ -2,7 +2,6 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import { signupPost } from "../api/routes";
-import img from "../assets/img/patt.png";
 import MessageBanner from "../components/MessageBanner";
 export default function SignupPage() {
   const {
@@ -36,32 +35,30 @@ export default function SignupPage() {
   };
   const validatePassword = (value) => {
     const regex = /[!@#$%^&*(),.?":{}|<>]/;
-    return (
-      regex.test(value) ||
-      "Password must contain at least one special character"
-    );
+    const digitRegex = /[0-9]/;
+
+    if (!regex.test(value) || !digitRegex.test(value)) {
+      return "Password must contain at least one special character and digit";
+    }
   };
 
-  const checkEmail = (value) => {
-    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return regex.test(value) || "Invalid email address";
-  }
+  // const checkEmail = (value) => {
+  //   const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  //   return regex.test(value) || "Invalid email address";
+  // };
 
   return (
-    <section className="flex items-center">
-      <div className="w-1/2">
-        <img className="h-screen object-cover w-full" src={img} alt="pattern" />
-      </div>
-      <div className="h-fit w-1/2 ">
+    <section className="login_screen signup_screen">
+      <div className="login_container">
         <form
-          className="container w-4/5 mx-auto"
+          className="login_form"
           onSubmit={handleSubmit(onSubmit)}
         >
           <h1 className="text-3xl font-bold mb-6 text-primary-dark">
             Create an Account
           </h1>
           <div className="form-group">
-            <label htmlFor="firstname" className="w-1/3 text-lg">
+            <label htmlFor="firstname" className="text-lg">
               First Name
             </label>
             <input
@@ -69,14 +66,17 @@ export default function SignupPage() {
               id="firstname"
               name="firstname"
               className="input-field"
+              aria-describedby={errors.firstname ? "firstname-error" : null}
               {...register("firstname", { required: true })}
             />
           </div>
           {errors.firstname && (
-            <span className="text-red-600">This field is required</span>
+            <span id="firstname-error" className="text-red-600" role="alert">
+              This field is required
+            </span>
           )}
           <div className="form-group">
-            <label htmlFor="lastname" className="w-1/3 text-lg">
+            <label htmlFor="lastname" className="text-lg">
               Last Name
             </label>
             <input
@@ -84,14 +84,17 @@ export default function SignupPage() {
               id="lastname"
               name="lastname"
               className="input-field"
+              aria-describedby={errors.lastname ? "lastname-error" : null}
               {...register("lastname", { required: true })}
             />
           </div>
           {errors.lastname && (
-            <span className="text-red-600">This field is required</span>
+            <span id="lastname-error" className="text-red-600" role="alert">
+              This field is required
+            </span>
           )}
           <div className="form-group">
-            <label htmlFor="email" className="w-1/3 text-lg">
+            <label htmlFor="email" className="text-lg">
               Email
             </label>
             <input
@@ -99,15 +102,18 @@ export default function SignupPage() {
               id="email"
               name="email"
               className="input-field"
+              aria-describedby={errors.email ? "email-error" : null}
               {...register("email", { required: true })}
             />
           </div>
           {errors.email && (
-            <span className="text-red-600">This field is required</span>
+            <span id="email-error" className="text-red-600" role="alert">
+              This field is required
+            </span>
           )}
 
           <div className="form-group">
-            <label htmlFor="password" className="w-1/3 text-lg">
+            <label htmlFor="password" className="text-lg">
               Password
             </label>
             <input
@@ -115,6 +121,7 @@ export default function SignupPage() {
               id="password"
               name="password"
               className="input-field"
+              aria-describedby={errors.password ? "password-error" : null}
               {...register("password", {
                 required: true,
                 minLength: 6,
@@ -123,8 +130,14 @@ export default function SignupPage() {
               })}
             />
           </div>
-          <span className="flex_col text-red-500">
-            {errors.password?.type === "required" && <p>This field is required</p>}
+          <span
+            id="password-error"
+            className="flex_col text-red-500"
+            role="alert"
+          >
+            {errors.password?.type === "required" && (
+              <p>This field is required</p>
+            )}
             {errors.password?.type === "minLength" && (
               <p>Password must be at least 6 characters</p>
             )}
@@ -132,7 +145,10 @@ export default function SignupPage() {
               <p>Password must be at most 100 characters</p>
             )}
             {errors.password?.type === "validate" ? (
-              <p>Password must contain at least one special character</p>
+              <>
+                <p>Password must contain at least one special character</p>
+                <p>Password must contain at least one number</p>{" "}
+              </>
             ) : (
               errors.password?.message
             )}

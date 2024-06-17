@@ -101,21 +101,21 @@ export default function ModalAdd({ isOpen, setIsOpen, reloadCharacters }) {
           onSubmit={handleSubmit(onSubmit)}
           onReset={closeModal}
           encType="multipart/form-data"
-          className="flex_row gap-8 items-center"
+          className="form_container "
         >
-          <div className="w-1/4 ">
+          <div className="image_container">
             <div className="flex_col gap-4 items-center">
               {file ? (
                 <img
                   src={file}
                   alt="selected avatar"
-                  className="mx-auto w-60"
+                  className=" mx-auto "
                 />
               ) : (
                 <img
                   src="https://via.placeholder.com/220"
                   alt="placeholder"
-                  className="mx-auto max-w-60 rounded-full"
+                  className="mx-auto rounded-full"
                 />
               )}
               <label
@@ -136,7 +136,7 @@ export default function ModalAdd({ isOpen, setIsOpen, reloadCharacters }) {
               <span className="text-red-600">This field is required</span>
             )}
           </div>
-          <div className="w-3/4 ">
+          <div className="inputs_container">
             <div>
               <div className="form-group">
                 <label className="title" htmlFor="name">

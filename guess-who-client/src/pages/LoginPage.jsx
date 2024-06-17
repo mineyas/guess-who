@@ -44,10 +44,10 @@ export default function LoginPage() {
     }
   };
   return (
-    <section className="login-container flex items-center justify-center h-screen">
-      <div className="container w-1/2 mx-auto">
+    <section className="login_screen">
+      <div className="login_container">
         <form
-          className="container w-4/5 mx-auto"
+          className="login_form"
           onSubmit={handleSubmit(onSubmit)}
         >
           <h1 className=" text-accent4-dark">Welcome Back</h1>

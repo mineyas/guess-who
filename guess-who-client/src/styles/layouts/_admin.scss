@@ -34,7 +34,6 @@
     //   background-color: darken($primary-color, 10%);
   }
 }
-
 .admin-card-info {
   display: flex;
   flex-direction: column;
@@ -43,7 +42,6 @@
   height: 76%;
   color: white;
 }
-
 .admin-card-counter {
   position: absolute;
   bottom: 0;
@@ -65,6 +63,10 @@
 }
 
 @media screen and (max-width: 768px) {
+  .admin_title {
+    display: flex;
+    flex-direction: row;
+}
   .admin-card {
     width: calc(80% - 2rem);
   }
@@ -75,22 +77,3 @@
     width: 100%;
   }
 }
-//   .hover\:bg-accent4-light:hover {
-//     background-color: lighten($accent4-color, 10%); // Example color, update as necessary
-//   }
-
-//   .hover\:border-accent4:hover {
-//     border-color: $accent4-color; // Example color, update as necessary
-//   }
-
-//   .hover\:text-accent4:hover {
-//     color: $accent4-color; // Example color, update as necessary
-//   }
-
-//   .text-white {
-//     color: white;
-//   }
-
-//   .bg-accent4 {
-//     background-color: $accent4-color; // Example color, update as necessary
-//   }

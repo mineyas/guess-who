@@ -4,17 +4,6 @@
 @tailwind components;
 @tailwind utilities;
 
-/* @layer base {
-  h2 {
-    font-family: 'Poppins', sans-serif;
-  }
-}
-
-.react-pdf__Page__canvas {
-  width: 100% !important;
-  height: 100% !important;
-} */
-
 :root {
   --color-primary: #0fa3b1;
   --color-primary-light: #66ccd9;
@@ -89,7 +78,7 @@ input[type="file"] {
   scroll-behavior: smooth;
   overflow: scroll;
 }
-.modal-container {
+/* .modal-container {
   position: fixed;
   top: 0;
   left: 0;
@@ -101,7 +90,7 @@ input[type="file"] {
   align-items: center;
   z-index: 9999;
   overflow: scroll;
-}
+} */
 .active {
   background-color: var(--color-accent2-light);
   color: var(--color-accent2-dark);
@@ -170,8 +159,8 @@ input[type="file"] {
   margin-bottom: 0.5rem;
 }
 .form-group .title {
-  width: 20%;
-  color: var(--color-primary);
+  /* width: 20%;
+  color: var(--color-primary); */
 }
 .input-field {
   padding: 12px;
@@ -190,12 +179,12 @@ input[type="file"] {
   width: fit-content;
 }
 
-.login-container {
+/* .login-container {
   background-image: url("./assets/img/bg.png");
   background-repeat: no-repeat;
   background-size: cover;
-  height: 100vh;
-}
+  height: 100%;
+} */
 
 .users-table {
   width: 100%;

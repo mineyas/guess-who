@@ -1,7 +1,7 @@
 import { Icon } from "@iconify/react";
 import { useEffect, useState } from "react";
 import { loadAllCharactersPlayer } from "../../api/routes";
-import logo from "../../assets/img/quii.png";
+import logo from "../../assets/img/qui.png";
 export default function Board() {
   const [isDeleted, setIsDeleted] = useState(false);
   const [characters, setCharacters] = useState([]);

@@ -1,0 +1,63 @@
+@import "./../abstracts/_abstracts-dir";
+
+.login_screen {
+    background-image: url("../../assets/img/bg.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100vh;
+    .login_container {
+        width: 100%;
+        @include flex-center();
+        height: 100%;
+        .login_form {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 4rem;
+            margin: 0 auto;
+            width: 90%;
+            h1 {
+                margin-bottom: 2rem
+            }
+
+            .form-group {
+                @include flex-center;
+                @include flex-direc(column);
+                margin-bottom: 0.5rem;
+                gap: 1rem;
+
+                label,
+                input {
+                    width: 100%;
+                }
+            }
+        }
+    }
+}
+
+.signup_screen {
+    background-image: url("../../assets/img/patt.png");
+
+}
+
+@media screen and (min-width: 768px) {
+    .login_screen {
+        .login_container {
+            .login_form {
+                width: 50%;
+                .form-group {
+                    @include flex-center;
+                    @include flex-direc(row);
+                    margin-bottom: 0.5rem;
+                    gap: 1rem;
+    
+                    label,
+                    input {
+                        width: 100%;
+                    }
+                }
+            }
+        }
+    }
+    
+}

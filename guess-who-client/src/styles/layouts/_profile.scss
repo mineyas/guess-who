@@ -1,5 +1,48 @@
 @import "../abstracts/_abstracts-dir";
 
-  .profile-page {
-    @include section-styles(flex, column, center, center, $color-primary-dark);
+.profile-page {
+  @include section-styles(flex, column, center, center, $color-primary-dark);
+
+  // .container {
+
+  .form_container {
+    @include flex-direc(column);
+    gap: 2rem;
+    // margin: 0 auto;
+
+    .inputs_container {
+      @include flex-direc(column);
+      gap: 1rem;
+
+      .info_container {
+        @include flex-direc(column);
+        gap: 1rem;
+
+        input {
+          width: 100%;
+        }
+      }
+
+    }
   }
+
+  // }
+
+  @media screen and (min-width: 768px) {
+    .container {
+      width: 50%;
+
+      .form_container {
+        .inputs_container {
+          .info_container {
+            @include flex-justify(space-between);
+
+            input {
+              width: 80%;
+            }
+          }
+        }
+      }
+    }
+  }
+}

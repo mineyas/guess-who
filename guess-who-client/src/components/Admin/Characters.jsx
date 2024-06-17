@@ -4,12 +4,14 @@ import { useForm } from "react-hook-form";
 import { deleteCharacter, loadAllCharacters } from "../../api/routes";
 import ModalAdd from "./ModalAdd";
 import ModalViewEdit from "./ModalViewEdit";
+import ModalEdit from "./ModalEdit";
+import ModalView from "./ModalView";
 export default function Characters() {
   const [characters, setCharacters] = useState([]);
   const [selectedCharacter, setSelectedCharacter] = useState(null);
   const [isModalAddOpen, setIsModalAddOpen] = useState(false);
   const [isModalViewEditOpen, setIsModalViewEditOpen] = useState(false);
-
+  const [isModalViewOpen, setIsModalViewOpen] = useState(false);
   const { reset } = useForm();
   const getCharacters = () => {
     try {
@@ -38,6 +40,10 @@ export default function Characters() {
     setSelectedCharacter(e);
     setIsModalViewEditOpen(true);
     reset();
+  };
+  const openViewModal = (e) => {
+    setSelectedCharacter(e);
+    setIsModalViewOpen(true);
   };
   const openCreateCharactereModal = (e) => {
     setSelectedCharacter(e);
@@ -94,7 +100,7 @@ export default function Characters() {
                         <Icon
                           icon="material-symbols:visibility"
                           className="icon"
-                          onClick={() => openCharactereModal(character)}
+                          onClick={() => openViewModal(character)}
                           width={35}
                         />
                         <Icon
@@ -127,6 +133,12 @@ export default function Characters() {
         reloadCharacters={reloadCharacters}
         isOpen={isModalViewEditOpen}
         setIsOpen={setIsModalViewEditOpen}
+      />
+      <ModalView
+        character={selectedCharacter}
+        reloadCharacters={reloadCharacters}
+        isOpen={isModalViewOpen}
+        setIsOpen={setIsModalViewOpen}
       />
     </div>
   );

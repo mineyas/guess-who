@@ -3,17 +3,13 @@
   padding: 2rem;
 
   @media screen and (max-width: 1200px) {
-    background: pink;
+    height: auto;
   }
 
   @media screen and (max-width: 768px) {
-    background: green;
     height: auto;
 
   }
 
-  @media screen and (max-width: 480px) {
-    background: red;
-
-  }
+  @media screen and (max-width: 480px) {}
 }

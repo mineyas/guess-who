@@ -1,5 +1,5 @@
 import { NavLink } from "react-router-dom";
-import qui from "../../assets/img/quii.png";
+import qui from "../../assets/img/qui.png";
 import { getUserById } from "../../api/routes";
 import { useEffect, useState } from "react";
 // import "./navbar.scss";

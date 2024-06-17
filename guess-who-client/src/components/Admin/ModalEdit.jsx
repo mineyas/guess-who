@@ -6,7 +6,7 @@ import { updateCharacter } from "../../api/routes";
 import CharacterFormField from "../../ReusableComponents/CharacterFormField";
 import FormButtons from "../../ReusableComponents/FormButtons";
 
-export default function ModalViewEdit({
+export default function ModalEdit({
   character,
   reloadCharacters,
   isOpen,
@@ -35,8 +35,8 @@ export default function ModalViewEdit({
   const [fileUpdate, setFileUpdate] = useState();
   const [fileName, setFileName] = useState("");
 
-  const port = process.env.REACT_APP_BASE_URL;
-  const image = `${port}/uploads/`;
+  const port = process.env.REACT_APP_BASE_URL
+  const image = `${port}/uploads/`
 
   const handleChange = (e) => {
     console.log(e.target.files[0], "rrrr file");
@@ -99,7 +99,11 @@ export default function ModalViewEdit({
               <span className="flex_col gap-3 items-center justify-center">
                 <img
                   alt={character?.name}
-                  src={fileUpdate ? fileUpdate : `${image}${character?.image}`}
+                  src={
+                    fileUpdate
+                      ? fileUpdate
+                      : `${image}${character?.image}}`
+                  }
                   className="w-full"
                 />
                 {isEdit && (

@@ -59,7 +59,7 @@ export default function AdminPage() {
   }, []);
   return (
     <section className="section">
-      <div className="container_title">
+      <div className="container_title admin_title">
         <h1 className="w-full">Admin</h1>
         <span
           onClick={goToProfile}
